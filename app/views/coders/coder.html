@@ -1,0 +1,30 @@
+ <div ng-controller="CoderCtrl"><div class="coder">
+  <h3>
+    <a href="{{ '/coders/' + coder._id }}" title="{{ coder.title }}">
+      {{ coder.title }}
+    </a>
+  </h3>
+  <p>{{ coder.body }}</p>
+
+  <span class="muted">{{ coder.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+  {% if (coder.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + coder.user._id }}">
+      {{ coder.user.name || coder.user.username }}
+    </a>
+  {% endif %}
+
+  {% if (coder.tags) %}
+    &nbsp; - &nbsp;
+    <span>Tags: </span>
+    {% for tag in coder.tags.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>
+
+</div>

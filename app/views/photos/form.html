@@ -1,0 +1,70 @@
+ <div ng-controller="PhotoCtrl">{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+  <hr>
+{% endblock %}
+
+{% block content %}
+  {% if photo.isNew %}
+    {% set action = '/photos' %}
+  {% else %}
+    {% set action = '/photos/' + photo._id %}
+  {% endif %}
+
+  <div class="row">
+    <div class="col-md-8">
+      <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
+
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+
+        {% if not photo.isNew %}
+          <input type="hidden" name="_method" value="PUT">
+        {% endif %}
+
+        <div class="form-group">
+          <label for="title" class="col-sm-2 control-label">Title</label>
+          <div class="col-sm-10">
+            <input type="text" name="title" value="{{ photo.title }}" placeholder="Enter the title" class="form-control" id="title">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="file" class="col-sm-2 control-label">Image</label>
+          <div class="col-sm-10">
+            <input type="file" name="image" class="form-control" id="file">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="desc" class="col-sm-2 control-label">Body</label>
+          <div class="col-sm-10">
+            <textarea rows="5" name="body" placeholder="Enter the photo description" id="desc" cols="30" rows="10" class="form-control">{{ photo.body }}</textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tags" class="col-sm-2 control-label">Tags</label>
+          <div class="col-sm-10">
+            <input type="text" name="tags" value="{{ photo.tags }}" placeholder="Enter the tags" class="form-control" id="tags">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-primary" type="submit">Save</button>
+            &nbsp;
+            <a href="/photos" class="btn btn-link">Cancel</a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4">
+      {% if (!photo.isNew && photo.image && photo.image.files && photo.image.files.length) %}
+        <img src="{{ photo.image.cdnUri + '/mini_' + photo.image.files[0] }}" alt="">
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+</div>

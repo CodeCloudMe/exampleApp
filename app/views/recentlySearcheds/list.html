@@ -1,0 +1,28 @@
+ <div ng-controller="RecentlySearchedCtrl">{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+  {% if (recentlySearcheds.length) %}
+    {% for recentlySearched in recentlySearcheds %}
+      {% include 'recentlySearched.html' %}
+    {% endfor %}
+
+    {% if (pages > 1) %}
+      <ul class="pagination">
+        {% autoescape false %}
+          {{ createPagination(pages, page) }}
+        {% endautoescape %}
+      </ul>
+    {% endif %}
+  {% else %}
+    <h4 class="muted">
+      No recentlySearcheds.&nbsp;
+      <a href="/recentlySearcheds/new">create one</a>
+    </h4>
+  {% endif %}
+{% endblock %}
+
+</div>

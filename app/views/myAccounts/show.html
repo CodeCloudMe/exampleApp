@@ -1,0 +1,405 @@
+ <div ng-controller="MyAccountCtrl">{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ myAccount.title }}</h1>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      <p>{{ myAccount.body }}</p>
+      <div class="meta">
+        {% if (myAccount.user) %}
+          Author: &nbsp;
+          <a href="{{ '/users/' + myAccount.user._id }}">
+            {{ myAccount.user.name || myAccount.user.username }}
+          </a>
+        {% endif %}
+        {% if (myAccount.tags) %}
+          <p>
+            Tags: &nbsp;
+            {% for tag in myAccount.tags.split(',') %}
+              <i class="muted fa fa-tag"></i>&nbsp;
+              <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+              &nbsp;&nbsp;
+            {% endfor %}
+          </p>
+        {% endif %}
+        <span class="muted">{{ myAccount.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      {% if (!myAccount.isNew && myAccount.image && myAccount.image.files && myAccount.image.files.length) %}
+        <img src="{{ myAccount.image.cdnUri }}" alt="">
+      {% endif %}
+    </div>
+  </div>
+
+  <form action="{{ '/myAccounts/' + myAccount.id }}" method="post" onsubmit="return confirm('Are you sure?')">
+    <br>
+    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+    <a href="{{ '/myAccounts/' + myAccount._id + '/edit' }}" title="edit" class="btn btn-default">
+      Edit
+    </a>
+    &nbsp;
+    <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-danger" type="submit">Delete</button>
+  </form>
+
+  <br>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <br>
+  <h3>Comments</h3>
+  {% for comment in myAccount.comments %}
+   
+
+
+
+{% if (comment && comment.user) %}
+  <div class="comment">
+    {% if (comment.user.name) %}
+      {% set name = comment.user.name %}
+    {% else %}
+      {% set name = comment.user.username %}
+    {% endif %}
+
+    <p>
+      <a href="{{ '/users/' + comment.user._id }}">{{ name }}</a>
+      :&nbsp;
+      {{ comment.body }}
+    </p>
+
+    <!-- <p class="muted"> -->
+      <form role="form" method="post" action="{{ '/myAccounts/' + myAccount._id + '/comments/' + comment._id }}" onsubmit="return confirm('Are you sure?')" class="form-inline">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <span class="muted">{{ comment.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger btn-link error" type="submit">delete</button>
+      </form>
+    <!-- </p> -->
+  </div>
+{% endif %}
+
+
+
+
+
+
+
+
+  {% endfor %}
+  
+
+
+
+
+
+
+  <form method="post" action="{{ '/myAccounts/' + myAccount._id + '/comments' }}" role="form">
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+  <div class="form-group">
+    <textarea rows="6" name="body" placeholder="Add your comment" id="" cols="30" rows="10" class="form-control"></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Add comment</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <br>
+  <h3>Ratings</h3>
+
+  <div id="theRating">{{myAccount.ratings.length}}</div>
+  {% set totalRatings = 0 %}
+  {% set totalRatingAvg = 0 %}
+  {% set totalRatingAll = 0 %}
+
+
+  {% for rating in myAccount.ratings %}
+  {% set totalRatingAll = totalRatingAvg +  rating.rating %}
+  {% set totalRatingAvg = totalRatingAll / totalRatings %}
+
+
+{% if (rating && rating.user) %}
+
+
+  <div class="comment" >
+    {% if (rating.user.name) %}
+      {% set name = rating.user.name %}
+    {% else %}
+      {% set name = rating.user.username %}
+    {% endif %}
+
+    <p>
+      <a href="{{ '/users/' + rating.user._id }}">{{ name }}</a>
+      :&nbsp;
+      {{ rating.rating }}
+    </p>
+
+    <!-- <p class="muted"> -->
+      <form role="form" method="post" action="{{ 'myAccounts/' + myAccount._id + '/ratings/' + rating._id }}" onsubmit="return confirm('Are you sure?')" class="form-inline">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <span class="muted">{{ rating.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger btn-link error" type="submit">delete</button>
+      </form>
+    <!-- </p> -->
+  </div>
+{% endif %}
+
+
+
+
+
+
+
+
+  {% endfor %}
+  
+
+
+
+
+
+
+  <form method="post" action="{{ 'myAccounts/' + myAccount._id + '/ratings' }}" role="form">
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+  <div class="form-group">
+    <textarea rows="6" name="rating" placeholder="Add your rating" id="ratingVal" cols="30" rows="10" class="form-control" style="display:none"></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Add rating</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+  <br>
+  <h3>Likes</h3>
+  {% for like in myAccount.likes %}
+
+
+
+
+{% if (like && like.user) %}
+  <div class="comment">
+
+    a user liked this<br>
+    {% if (like.user.name) %}
+      {% set name = like.user.name %}
+    {% else %}
+      {% set name = like.user.username %}
+    {% endif %}
+
+    <p>
+      <a href="{{ '/users/' + like.user._id }}">{{ name }}</a> liked this. <br>
+    </p>
+
+    <!-- <p class="muted"> -->
+      <form role="form" method="post" action="{{ 'myAccounts/' + myAccount._id + '/likes/' + like._id }}" onsubmit="return confirm('Are you sure?')" class="form-inline">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <span class="muted">{{ like.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger btn-link error" type="submit">delete</button>
+      </form>
+    <!-- </p> -->
+  </div>
+{% endif %}
+
+
+
+
+
+
+
+
+  {% endfor %}
+  
+
+
+
+
+
+
+  <form method="post" action="{{ 'myAccounts/' + myAccount._id + '/likes' }}" role="form">
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+  <div class="form-group">
+    <textarea rows="6" name="like" placeholder="Add your like" id="" cols="30" rows="10" class="form-control" style="display:none">yes</textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Add like</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+  <div id="thisCategories" style="display:none">
+  <h3>Categories</h3>
+
+
+  {% for category in myAccount.categories %}
+
+
+
+
+{% if (category && category.user) %}
+  <div class="comment">
+
+    a user categoryd this<br>
+    {% if (category.user.name) %}
+      {% set name = category.user.name %}
+    {% else %}
+      {% set name = category.user.username %}
+    {% endif %}
+
+    <p>
+      <a href="{{ '/users/' + category.user._id }}">{{ name }}</a>
+      :&nbsp;
+      {{ category.category }}
+    </p>
+
+    <!-- <p class="muted"> -->
+      <form role="form" method="post" action="{{ 'myAccounts/' + myAccount._id + '/categories/' + category._id }}" onsubmit="return confirm('Are you sure?')" class="form-inline">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <span class="muted">{{ category.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger btn-link error" type="submit">delete</button>
+      </form>
+    <!-- </p> -->
+  </div>
+{% endif %}
+
+
+
+
+
+
+
+
+  {% endfor %}
+  
+
+
+
+
+
+
+  <form method="post" action="{{ 'myAccounts/' + myAccount._id + '/categories' }}" role="form">
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+  <div class="form-group">
+    <textarea rows="6" name="category" placeholder="Add your category" id="" cols="30" rows="10" class="form-control"></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Add category</button>
+</form>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+  
+{% endblock %}
+</div>

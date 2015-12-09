@@ -1,0 +1,30 @@
+ <div ng-controller="ResultCtrl"><div class="result">
+  <h3>
+    <a href="{{ '/results/' + result._id }}" title="{{ result.title }}">
+      {{ result.title }}
+    </a>
+  </h3>
+  <p>{{ result.body }}</p>
+
+  <span class="muted">{{ result.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+  {% if (result.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + result.user._id }}">
+      {{ result.user.name || result.user.username }}
+    </a>
+  {% endif %}
+
+  {% if (result.tags) %}
+    &nbsp; - &nbsp;
+    <span>Tags: </span>
+    {% for tag in result.tags.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>
+
+</div>

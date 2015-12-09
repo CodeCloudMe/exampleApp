@@ -1,0 +1,34 @@
+.btn-read:hover,
+#tb-scroll-to-top:hover,
+.w-title span,
+.inner-title-alt.dark h2:after,
+.fun-box .value:after,
+.price-col .p-btn:hover,
+.price-col.feature .p-btn, .price-col.feature .p-btn:hover,
+.widget-social-link a:hover,
+.tags li a:hover {
+    background: #93b588;
+}
+
+
+.price-col .p-btn:hover,
+.price-col.feature .p-btn, .price-col.feature .p-btn:hover {
+    border-color: #93b588;
+}
+
+.latest-blog-post h3 a:hover,
+.latest-blog-post .cat a:hover,
+.copyright span a:hover,
+.price-col.feature h1,
+.blog-post h4 a:hover,
+.blog-post .post-meta li a:hover,
+.btn-read-more:hover,
+.widget-latest-post .w-desk a:hover,
+.widget-category li a:hover ,
+.breadcrumb a:hover,
+.comment-body .reply a:hover ,
+.comment-respond a:hover,
+.widget-comments li a:hover {
+    color: #93b588;
+}
+

@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html ng-app="ionicApp">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+  <title>App</title>
+
+  
+    <link href="css/ionic.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="bower_components/ion-google-place/ion-google-place.css" rel="stylesheet">
+
+
+
+
+    <script src="/mobileApp/main/js/jquery.js"></script>
+
+    <script src="/mobileApp/main/js/main.js"></script>
+
+    <!--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAup5ZeW3gaucQ0SRtUKxUFN-KN1NprMZA&callback=initMap"
+        async defer></script>-->
+    <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+
+    <script src="js/moment.min.js"></script>
+
+    <script src="js/ionic.js"></script>
+
+    <script src="js/angular-moment.min.js"></script> 
+
+
+    <script src="bower_components/ion-google-place/ion-google-place.js"></script>
+
+
+    <script src="js/app.js"></script> 
+
+  
+
+
+
+  <style>
+      .box {height:300px;padding: 10px}
+  </style>      
+</head>
+
+<body ng-controller="AppCtrl">
+
+  <ion-nav-bar class="nav-title-slide-ios7 bar-positive">
+    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-nav-view animation="slide-left-right"></ion-nav-view>
+    
+  <script id="menu.html" type="text/ng-template">
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <ion-side-menus>
+
+      <ion-side-menu side="left">
+        <ion-header-bar class="bar-positive">
+          <h1 class="title">Side Menu</h1>
+        </ion-header-bar>
+        <ion-content>
+          <ul class="list generated">
+            <a href="#/menu/tab/buttons" class="item" menu-close>UI Components</a>
+            <a href="#/menu/boom" class="item" menu-close>Boom</a>
+
+            <a href="#/menu/keyboard" class="item" menu-close>Keyboard Input Types</a>
+            <a href="#/menu/slidebox" class="item" menu-close>Slide Box</a>
+            <a href="#/menu/about" class="item" menu-close>About</a>
+
+            <!--ul generated-->
+
+            <!--object tabs-->
+
+            <!--end object tabs-->
+
+             <a href="#/menu/register" class="item" menu-close>Register</a>
+
+            <a href="#/menu/login" class="item" menu-close>Login</a>
+            <a href="#/menu/findPeople" class="item" menu-close>Find People</a>
+            <a href="#/menu/messages" class="item" menu-close>Messages</a>
+              <a href="#/intro" class="item" menu-close>How-To</a>
+
+
+
+
+          </ul>
+        </ion-content>
+      </ion-side-menu>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <ion-side-menu-content> 
+        <ion-nav-bar class="bar-positive">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+              <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+              </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>              
+        <ion-nav-view name="menuContent"></ion-nav-view>
+      </ion-side-menu-content>
+
+    </ion-side-menus>
+  </script>    
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--end menu -->
+
+
+
+
+
+
+
+
+
+  <!--start bottom tabs -->
+
+
+
+    
+  <script id="tabs.html" type="text/ng-template">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button class="button-icon ion-arrow-left-c">
+        </ion-nav-back-button>
+
+        <ion-nav-buttons side="left">
+          <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-compose" ng-click="modal.show()"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+        
+    <ion-tabs class="tabs-icon-top tabs-positive">
+
+      <ion-tab title="Buttons" icon="ion-pricetag" href="#/menu/tab/buttons">
+        <ion-nav-view name="buttons-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="List Nav" icon="ion-clipboard" href="#/menu/tab/list">
+        <ion-nav-view name="list-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="Inbox" icon="ion-android-cloud" href="#/menu/tab/inbox">
+        <ion-nav-view name="inbox-tab"></ion-nav-view>
+      </ion-tab>
+
+
+
+      <ion-tab title="Form" icon="ion-settings" href="#/menu/tab/form">
+        <ion-nav-view name="form-tab"></ion-nav-view>
+      </ion-tab>
+
+    </ion-tabs>
+  </script>
+
+
+
+
+
+
+
+<!--end bottom tabs -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- start pages -->
+
+
+
+
+
+
+
+<div style="display:none">
+
+
+
+<!--genericList-->
+<script id="genericList.html" type="text/ng-template">
+  <ion-view view-title="Generic List">
+<ion-content ng-controller="GenericListCtrl">
+
+
+<button class="button button-full button-positive" ng-click="createNew()">
+ Create New
+</button>
+<br>
+ <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="genericListLabel">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" id="genericListSearch" placeholder="Name">
+          </label>
+      </div>
+
+      <button class="button button-full button-positive" ng-click="find()">
+Find
+</button>
+
+
+  <ion-list >
+    <ion-item ng-show="!contents.length">No Results</ion-item>
+    <ion-item ng-repeat="content in contents | orderBy:'-createdAt'" ng-click="showProfile('{{content._id}}')">
+      <h1 style="font-size:16px"> {{content.user.username}}</h1>
+      <h2>{{content.title}}</h2>
+      <small class="col text-right">uploaded {{contents.createdAt | date: 'short' }}</small>
+    </ion-item>
+  </ion-list>
+
+
+
+
+ </ion-content>
+  </ion-view>
+  </script>
+<!--end genericList-->
+
+
+
+<!--genericMyList-->
+<script id="genericMyList.html" type="text/ng-template">
+  <ion-view view-title="Generic List">
+<ion-content ng-controller="GenericMyListCtrl">
+
+ <button class="button button-full button-positive" ng-click="createNew()">
+ Create New
+</button>
+
+ <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="genericMyListLabel">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" id="genericMyListSearch" placeholder="Name">
+          </label>
+      </div>
+
+      <button class="button button-full button-positive" ng-click="find()">
+Find
+</button>
+
+
+  <ion-list >
+    <ion-item ng-show="!contents.length">No Results</ion-item>
+    <ion-item ng-repeat="content in contents | orderBy:'-createdAt'" ng-click="showProfile('{{content._id}}')">
+      <h1 style="font-size:16px"> {{content.user.username}}</h1>
+      <h2>{{content.title}}</h2>
+      <small class="col text-right">uploaded {{contents.createdAt | date: 'short' }}</small>
+    </ion-item>
+  </ion-list>
+
+
+
+
+ </ion-content>
+  </ion-view>
+  </script>
+<!--end genericMyList-->
+
+
+<!--genericForm-->
+<script id="genericForm.html" type="text/ng-template">
+  <ion-view view-title="Generic Form">
+<ion-content ng-controller="GenericFormCtrl">
+
+ <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="genericFormEditTitleLabel">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" id="genericFormEditTitle" placeholder="Edit Title" value="{{contents.title}}">
+          </label>
+      </div>
+<br>
+
+ <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="genericFormEditBodyLabel">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" id="genericFormEditBody" placeholder="Edit Description" value="{{contents.body}}">
+          </label>
+      </div>
+<br>
+
+      <button class="button button-full button-positive saveButton"  ng-click="save()">
+Save
+</button>
+
+ <button class="button button-full button-positive createButton"  ng-click="create()">
+Create
+</button>
+
+
+
+
+
+
+ </ion-content>
+  </ion-view>
+  </script>
+<!--end genericForm-->
+
+
+
+<!--genericShow-->
+<script id="genericShow.html" type="text/ng-template">
+  <ion-view view-title="View">
+<ion-content ng-controller="GenericShowCtrl">
+
+ <h1>{{contents.title}}</h1>
+<br>
+      <button class="button button-full button-positive" ng-click="messageUser(contents.user._id)">
+Message User
+</button>
+
+<button class="button button-full button-positive" ng-click="edit(contents._id)">
+Edit
+</button>
+
+
+<button class="button button-full button-positive" ng-click="delete(contents._id)">
+Delete
+</button>
+
+
+
+
+  
+
+
+
+
+ </ion-content>
+  </ion-view>
+
+
+</script>
+<!--end genericShow-->
+
+
+
+
+<!--genView nearby -->
+
+<style>
+      
+      #map {
+        width:400px;
+        height:400px;
+      }
+    </style>
+  
+    <div id="queryPlace" style="position:fixed; top:20%; width:100%; text-align:center; z-index:300">
+
+       <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="search-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search">
+          </label>
+      </div>
+
+        
+    </div>
+
+    <div id="map"></div>
+
+    <script>
+    console.log('to load. will not show');
+
+    </script>
+    
+    
+ 
+
+
+
+
+<!--end genView nearby -->
+
+
+
+
+
+
+
+
+<!--genView trans -->
+
+
+<style>
+      
+      #map1 {
+        width:400px;
+        height:400px;
+      }
+    </style>
+  
+    <div id="queryPlace2" style="position:fixed; top:20%; width:100%; text-align:center; z-index:300">
+
+       <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="search-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Origin">
+          </label>
+
+       </div>
+          <br><br>
+
+       <div class="item item-input-inset">
+           <label class="item-input-wrapper" id="search-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Destination">
+          </label>
+
+
+      </div>
+
+  
+
+        
+    </div>
+
+    <div id="map1"></div>
+    <script>
+
+    console.log('not going');
+    </script>
+   
+
+
+<!--end genView trans -->
+
+
+
+
+
+
+
+<!--genView locSearch -->
+
+<!--end genView locSearch -->
+
+
+
+
+<!--genView search -->
+
+  <div class="list">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="search-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search">
+          </label>
+        </div>
+        </div>
+        
+        <div class="list">
+          <div class="item item-divider">
+            Other form elements
+          </div>
+        
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div class="item-content">
+              Radio Item #1
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div class="item-content">
+              Radio Item #2
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          
+          <label class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox">
+             </label>
+             Checkbox
+          </label> 
+          
+          <li class="item item-toggle">
+             Toggle
+             <label class="toggle toggle-assertive">
+               <input type="checkbox">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+        
+          <div class="item range range-positive">
+            <i class="icon ion-ios7-sunny-outline"></i>
+            <input type="range" name="volume" min="0" max="100" value="33">
+            <i class="icon ion-ios7-sunny"></i>
+          </div>
+        
+          <div class="item item-input item-select">
+            <div class="input-label">
+              Select
+            </div>
+            <select>
+              <option>Option #1</option>
+              <option selected>Option #2</option>
+              <option>Option #3</option>
+            </select>
+          </div>
+          
+        </div>
+
+<!--end genView search -->
+
+
+
+
+<!--genView details -->
+<div class="list card">
+
+  <div class="item item-avatar">
+    <img src="images/profile.png">
+    <h2>Marty McHow Show</h2>
+    <p>November 05, 2015</p>
+  </div>
+
+  <div class="item item-body">
+    <img class="full-image" src="images/cover.jpg">
+    <p>
+      Want to know more? Well. etc. etc. This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+      the content is from a card-body consisting of an image and paragraph text. The footer
+      consists of tabs, icons aligned left, within the card-footer.
+    </p>
+    <p>
+      <a href="#" class="subdued">1 Like</a>
+      <a href="#" class="subdued">5 Comments</a>
+    </p>
+  </div>
+
+  <div class="item tabs tabs-secondary tabs-icon-left">
+    <a class="tab-item" href="#">
+      <i class="icon ion-thumbsup"></i>
+      Like
+    </a>
+    <a class="tab-item" href="#">
+      <i class="icon ion-chatbox"></i>
+      Comment
+    </a>
+    <a class="tab-item" href="#">
+      <i class="icon ion-share"></i>
+      Share
+    </a>
+  </div>
+
+</div>
+
+
+<!--end genView details -->
+
+
+
+<!--genView registration -->
+<div class="list">
+  <label class="item item-input item-floating-label">
+    <span class="input-label">First Name</span>
+    <input type="text" placeholder="First Name">
+  </label>
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Email</span>
+    <input type="email" placeholder="Email">
+  </label>
+
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Password</span>
+    <input type="password" placeholder="Password">
+  </label>
+  
+</div>
+<!--end genView registration -->
+
+
+
+<!--genView login -->
+<div class="list list-inset">
+  <label class="item item-input">
+    <input type="text" placeholder="Email">
+  </label>
+  <label class="item item-input">
+    <input type="password" placeholder="Password">
+  </label>
+</div>
+<!--end genView login -->
+
+
+
+
+<!--genView preferences -->
+
+<label class="toggle">
+   <ul class="list">
+
+  <li class="item item-toggle">
+     Notifications
+     <label class="toggle toggle-assertive">
+       <input type="checkbox">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+  </li>
+
+
+   <li class="item item-toggle">
+      E-mail Alerts
+     <label class="toggle toggle-assertive">
+       <input type="checkbox">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+  </li>
+
+
+
+   <li class="item item-toggle">
+     Geolocation
+     <label class="toggle toggle-assertive">
+       <input type="checkbox">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+  </li>
+
+
+   <li class="item item-toggle">
+     Facebook Graph
+     <label class="toggle toggle-assertive">
+       <input type="checkbox">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+  </li>
+
+
+   <li class="item item-toggle">
+     Twitter
+     <label class="toggle toggle-assertive">
+       <input type="checkbox">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+  </li>
+
+  
+
+</ul>
+</label>
+<!--end genView preferences -->
+
+
+
+<!--genView listen -->
+
+  <div class="list card">
+
+  <div class="item item-avatar">
+    <img src="images/profile.jpg">
+    <h2>Pretty Hate Machine</h2>
+    <p>Nine Inch Nails</p>
+  </div>
+
+  <div class="item item-image">
+    <img src="images/cover.jpg">
+  </div>
+
+  <a class="item item-icon-left assertive" href="#">
+    <i class="icon ion-music-note"></i>
+    Start listening
+  </a>
+
+</div>
+
+
+<!-- end genView listen -->
+
+<!--genView list -->
+<div class="list list-inset">
+
+    <div class="item">
+      Raiders of the Lost Ark
+    </div>
+
+    <div class="item">
+      The Titanic
+    </div>
+
+
+    <div class="item">
+      Boys N Da Hood
+    </div>
+
+
+    <div class="item">
+      Dirty Dancing
+    </div>
+
+
+
+  
+
+</div>
+
+
+<!--end genView list -->
+
+
+
+
+
+
+
+
+<!--genView recommended -->
+
+<div class="list">
+
+    <a class="item item-thumbnail-left" href="#">
+      <img src="images/cover.jpg">
+      <h2>Pretty Hate Machine</h2>
+      <p>Nine Inch Nails</p>
+    </a>
+
+
+     <a class="item item-thumbnail-left" href="#">
+       <img src="images/cover.jpg">
+      <h2>Pretty Hate Machine</h2>
+      <p>Nine Inch Nails</p>
+    </a>
+
+
+
+     <a class="item item-thumbnail-left" href="#">
+       <img src="images/cover.jpg">
+      <h2>Pretty Hate Machine</h2>
+      <p>Nine Inch Nails</p>
+    </a>
+
+   
+
+</div>
+
+
+<!--end genView recommended -->
+
+
+
+
+
+<!--genView contact -->
+
+<!--end genView contact -->
+
+
+
+
+<!--genView contacts -->
+
+<div class="list">
+
+    <a class="item item-avatar" href="#">
+      <img src="images/profile.png">
+      <h2>Venkman</h2>
+      <p>Back off, man. I'm a scientist.</p>
+    </a>
+
+      <a class="item item-avatar" href="#">
+      <img src="images/profile.png">
+      <h2>Venkman</h2>
+      <p>Back off, man. I'm a rocket.</p>
+    </a>
+
+
+      <a class="item item-avatar" href="#">
+      <img src="images/profile.png">
+      <h2>Venkman</h2>
+      <p>Back off, man. I'm a yoyo.</p>
+    </a>
+    
+
+</div>
+<!--end genView contacts -->
+
+
+
+
+
+<!--genView settings -->
+<div class="list" ng-controller="MeCtrl">        
+         
+          <label class="item item-divider">
+            Account Information
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Text</span>
+            <input type="text" ng-model="contents.username">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="contents.password">
+          </label>          
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="email" ng-model="contents.email"> 
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Tel</span>
+            <input type="tel">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Number</span>
+            <input type="number">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Date</span>
+            <input type="date">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Month</span>
+            <input type="month">
+          </label> 
+        </div>
+<!--end genView settings -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--genView detailsLoc -->
+
+<!--end genView detailsLoc -->
+
+
+
+
+
+<!--genView calendar -->
+
+<!--end genView calendar -->
+
+
+
+
+
+
+<!--genView shoppingCart -->
+
+  
+
+<!--end genView shoppingCart -->
+
+
+
+
+
+
+
+<!--genView payment -->
+
+<!--end genView payment -->
+
+
+
+
+
+<!--genView profile -->
+
+<!--end genView profile -->
+
+
+
+
+
+
+<!--genView chat -->
+
+<!--end genView chat -->
+
+
+
+
+
+
+<!--genView info -->
+
+<!--end genView info -->
+
+
+
+
+
+
+
+<!--genView matching -->
+
+<!--end genView matchin -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script id="register.html" type="text/ng-template">
+  <ion-view view-title="Register">
+<ion-content ng-controller="RegisterCtrl">
+
+
+
+
+<div class="list">
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Username</span>
+    <input type="text" id="regName" placeholder="Username">
+  </label>
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Email</span>
+    <input type="email" id="regEmail" placeholder="Email">
+  </label>
+
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Home Address</span>
+    <input type="email" id="regAddress" placeholder="Home Address">
+  </label>
+
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Phone Number</span>
+    <input type="tel" id="regPhone" placeholder="Phone Number">
+  </label>
+
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Password</span>
+    <input type="password" id="regPassword" placeholder="Password">
+  </label>
+
+   <label class="item item-input item-select">
+    <div class="input-label">
+      School
+    </div>
+  <select>
+      <option>Admiralty Primary School</option>
+      <option selected>Angsana Primary School</option>
+      <option>Angsana Primary School</option>
+  </select>
+  </label>
+
+
+  
+</div>
+
+<button class="button button-full button-positive" ng-click="register()">
+Register
+</button>
+
+ </ion-content>
+  </ion-view>
+
+
+</script>
+
+
+<script id="login.html" type="text/ng-template">
+  <ion-view view-title="Login">
+<ion-content ng-controller="LoginCtrl">
+
+
+
+
+<div class="list list-inset">
+  <label class="item item-input">
+    <input type="text" placeholder="Email" id="logEmail" ng-model="logEmail">
+  </label>
+  <label class="item item-input">
+    <input type="password" placeholder="Password" id="logPassword" ng-model="logPassword">
+  </label>
+</div>
+
+<button class="button button-full button-positive" ng-click="login()">
+Login
+</button>
+
+
+ </ion-content>
+  </ion-view>
+</script>
+
+
+
+
+
+
+
+
+
+
+  <script id="buttons.html" type="text/ng-template">
+    <ion-view view-title="Buttons">
+      <ion-content class="padding">
+        <p>Example of Ionic buttons, grouped buttons, popup and actionsheet.</p>
+        <p>
+          <a class="button icon icon-left button-assertive" ng-click="showPopup()">Popup</a>
+          <a class="button icon icon-left button-energized" ng-click="showActionsheet()">Action Sheet</a>
+          <a class="button icon icon-left button-balanced" ng-click="modal.show()">Modal</a>
+        </p>
+        <p>
+        <button class="button icon ion-gear-a"></button>
+        </p>
+        <p>
+        <button class="button button-outline button-positive">
+          Outlined Button
+        </button>
+        </p>
+        <p>
+        <button class="button button-block button-dark">
+          Block Button
+        </button>
+        </p>
+        <p>
+        <div class="button-bar">
+          <a class="button">First</a>
+          <a class="button">Second</a>
+          <a class="button">Third</a>
+        </div>
+        </p>        
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="item.html" type="text/ng-template">
+    <ion-view title="Item">
+      <ion-content class="padding">
+        <p>Details of Item</p>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <script id="list.html" type="text/ng-template">
+    <ion-view view-title="List Nav">
+      <ion-content>
+        <ion-list show-delete="data.showDelete" on-delete="onItemDelete(item)" option-buttons="itemButtons">
+
+        <div class="list">
+          <div class="item item-divider">
+            Static list
+          </div>  
+          
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-email"></i>
+            Check mail
+          </a>
+
+          <a class="item item-icon-left item-icon-right" href="#/menu/tab/item">
+            <i class="icon ion-chatbubble-working"></i>
+            Call Ma
+            <i class="icon ion-ios-telephone-outline"></i>
+          </a>
+
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-mic-a"></i>
+            Record album
+            <span class="item-note">
+              Grammy
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-person-stalker"></i>
+            Friends
+            <span class="badge badge-assertive">0</span>
+          </a>
+        
+          <div class="item item-divider">
+            Angularjs list
+          </div>
+               
+          <ion-item ng-repeat="item in items" class="item item-icon-right" href="#/menu/tab/item">
+            Item {{ item.id }}
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>  
+
+          <div class="item item-divider">
+            Avatar list item
+          </div>  
+
+          <a class="item item-avatar" href="#/menu/tab/item">
+            <img src="http://ionicframework.com/img/docs/blue-album.jpg">
+            <h2>Title</h2>
+            <p>Some detailed text</p>
+          </a>
+
+          <div class="item item-divider">
+            Thumbnail list item
+          </div>  
+          <a class="item item-thumbnail-left" href="#/menu/tab/item">
+            <img src="http://ionicframework.com/img/docs/blue-album.jpg">
+            <h2>Title</h2>
+            <p>Some detailed text</p>
+          </a>
+
+        </div>         
+
+        </ion-list>
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+<!--genPages-->
+
+
+
+
+<!--endGenPages -->
+
+
+
+
+<script id="inbox.html" type="text/ng-template">
+    <ion-view view-title="Inbox">
+      <ion-content>
+      inbox!!
+        <ion-list show-delete="data.showDelete" on-delete="onItemDelete(item)" option-buttons="itemButtons">
+
+        <div class="list">
+          <div class="item item-divider">
+            Inbox
+          </div>  
+          
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-email"></i>
+            Check mail
+          </a>
+
+          <a class="item item-icon-left item-icon-right" href="#/menu/tab/item">
+            <i class="icon ion-chatbubble-working"></i>
+            Call Ma
+            <i class="icon ion-ios-telephone-outline"></i>
+          </a>
+
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-mic-a"></i>
+            Record album
+            <span class="item-note">
+              Grammy
+            </span>
+          </a>
+
+          <a class="item item-icon-left" href="#/menu/tab/item">
+            <i class="icon ion-person-stalker"></i>
+            Friends
+            <span class="badge badge-assertive">0</span>
+          </a>
+        
+          <div class="item item-divider">
+            Angularjs list
+          </div>
+               
+          <ion-item ng-repeat="item in items" class="item item-icon-right" href="#/menu/tab/item">
+            Item {{ item.id }}
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>  
+
+          <div class="item item-divider">
+            Avatar list item
+          </div>  
+
+          <a class="item item-avatar" href="#/menu/tab/item">
+            <img src="http://ionicframework.com/img/docs/blue-album.jpg">
+            <h2>Title</h2>
+            <p>Some detailed text</p>
+          </a>
+
+          <div class="item item-divider">
+            Thumbnail list item
+          </div>  
+          <a class="item item-thumbnail-left" href="#/menu/tab/item">
+            <img src="http://ionicframework.com/img/docs/blue-album.jpg">
+            <h2>Title</h2>
+            <p>Some detailed text</p>
+          </a>
+
+        </div>         
+
+        </ion-list>
+      </ion-content>
+    </ion-view>
+  </script>
+
+
+
+
+
+
+
+  <script id="form.html" type="text/ng-template">
+    <ion-view view-title="Form Elements">
+      <ion-content class="padding">
+        
+        <div class="list">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="search-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search">
+          </label>
+        </div>
+        </div>
+        
+        <div class="list">
+          <div class="item item-divider">
+            Other form elements
+          </div>
+        
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div class="item-content">
+              Radio Item #1
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+            <input type="radio" name="group">
+            <div class="item-content">
+              Radio Item #2
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          
+          <label class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox">
+             </label>
+             Checkbox
+          </label> 
+          
+          <li class="item item-toggle">
+             Toggle
+             <label class="toggle toggle-assertive">
+               <input type="checkbox">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+        
+          <div class="item range range-positive">
+            <i class="icon ion-ios7-sunny-outline"></i>
+            <input type="range" name="volume" min="0" max="100" value="33">
+            <i class="icon ion-ios7-sunny"></i>
+          </div>
+        
+          <div class="item item-input item-select">
+            <div class="input-label">
+              Select
+            </div>
+            <select>
+              <option>Option #1</option>
+              <option selected>Option #2</option>
+              <option>Option #3</option>
+            </select>
+          </div>
+          
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>  
+
+  <script id="keyboard.html" type="text/ng-template">
+    <ion-view view-title="Keyboard">
+      <ion-content class="padding">
+        <div class="list">        
+          <label class="item item-divider">
+            Input types for popup keyboard
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Text</span>
+            <input type="text" ng-model="user.username">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="user.password">
+          </label>          
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="email">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Tel</span>
+            <input type="tel">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Number</span>
+            <input type="number">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Date</span>
+            <input type="date">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Month</span>
+            <input type="month">
+          </label> 
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>     
+
+
+
+
+
+
+<script id="findPeople.html" type="text/ng-template">
+  <ion-view view-title="Find People">
+<ion-content ng-controller="FindPeopleCtrl">
+
+ <div class="item item-input-inset">
+          <label class="item-input-wrapper" id="findUserSearchLabel">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" id="findUserSearch" placeholder="Name">
+          </label>
+      </div>
+
+      <button class="button button-full button-positive" ng-click="find()">
+Find
+</button>
+
+
+  <ion-list >
+    <ion-item ng-show="!peoples.length">No people found</ion-item>
+    <ion-item ng-repeat="people in peoples | orderBy:'-createdAt'" ng-click="viewProfile('{{people._id}}')">
+      <h1 style="font-size:16px"> {{people.username}}</h1>
+      <h2>{{chatRoom.body}}</h2>
+      <small class="col text-right">user since {{people.createdAt | date: 'short' }}</small>
+    </ion-item>
+  </ion-list>
+
+
+
+
+ </ion-content>
+  </ion-view>
+
+
+</script>
+
+
+
+<script id="viewProfile.html" type="text/ng-template">
+  <ion-view view-title="View Profile">
+<ion-content ng-controller="ViewProfileCtrl">
+
+ <h1>{{profile.name}}</h1>
+<br>
+      <button class="button button-full button-positive" ng-click="messageUser('{{profile._id}}')">
+Message User
+</button>
+
+
+  
+
+
+
+
+ </ion-content>
+  </ion-view>
+
+
+</script>
+
+
+
+<script id="messages.html" type="text/ng-template">
+  <ion-view view-title="Messages">
+<ion-content ng-controller="MessagesCtrl">
+
+
+  <ion-list >
+    <ion-item ng-show="!chatRooms.length">No recent conversations</ion-item>
+    <ion-item ng-repeat="chatRoom in chatRooms | orderBy:'-createdAt'" ng-click="goChat('{{chatRoom._id}}')">
+      <h1 style="font-size:16px"> {{chatRoom.username}}</h1>
+      <h2>{{chatRoom.body}}</h2>
+      <small class="col text-right">{{chatRoom.createdAt | date: 'short' }}</small>
+    </ion-item>
+  </ion-list>
+
+
+
+
+ </ion-content>
+  </ion-view>
+
+
+</script>
+
+
+
+<script id="conversation.html" type="text/ng-template">
+
+
+<style>
+.scroll {
+  padding: 10px 0 50px !important;
+}
+
+.messages {
+  display: -webkit-box !important;
+  display: -moz-box !important;
+  display: -ms-flexbox !important;
+  display: -webkit-flex !important;
+  display: flex !important;
+  -webkit-align-content: center !important;
+  -ms-flex-line-pack: center !important;
+  align-content: center !important;
+  -webkit-box-align: center !important;
+  -moz-box-align: center !important;
+  -webkit-align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+  margin-bottom: 20px !important;
+}
+.messages .message {
+  -webkit-box-flex: 1 !important;
+  -moz-box-flex: 1 !important;
+  -webkit-flex: 1 1 auto !important;
+  -ms-flex: 1 1 auto !important;
+  flex: 1 1 auto !important;
+  padding: 10px !important;
+  -webkit-transition: all 250ms ease-in-out !important;
+  transition: all 250ms ease-in-out !important;
+  overflow: hidden !important;
+  text-align: left !important;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  -moz-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.time {
+  -webkit-box-flex: 0 !important;
+  -moz-box-flex: 0 !important;
+  -webkit-flex: 0 1 auto !important;
+  -ms-flex: 0 1 auto !important;
+  flex: 0 1 auto !important;
+  -webkit-align-self: auto !important;
+  -ms-flex-item-align: auto !important;
+  align-self: auto !important;
+  width: 120px !important;
+  text-align: center !important;
+  padding: 0 0 0 0 !important;
+  -webkit-transition: all 250ms ease-in-out !important;
+  transition: all 250ms ease-in-out !important;
+  -webkit-transform: translate3d(10px, 0, 0) !important;
+  -moz-transform: translate3d(10px, 0, 0) !important;
+  transform: translate3d(10px, 0, 0) !important;
+}
+.time.slide-right {
+  -webkit-transform: translate3d(130px, 0, 0) !important;
+  -moz-transform: translate3d(130px, 0, 0) !important;
+  transform: translate3d(130px, 0, 0) !important;
+}
+
+.messages.other .message {
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  -moz-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+  text-align: right !important;
+}
+.messages.other .message.slide-right {
+  -webkit-transform: translate3d(120px, 0, 0) !important;
+  -moz-transform: translate3d(120px, 0, 0) !important;
+  transform: translate3d(120px, 0, 0) !important;
+}
+.messages.other span {
+  color: black !important;
+  background-color: #C7C7CC !important;
+}
+
+ion-content span {
+  background: #007AFF !important;
+  display: inline-block !important;
+  color: white !important;
+  padding: 10px !important;
+  border-radius: 10px !important;
+  text-align: left !important;
+  max-width: 240px !important;
+}
+
+
+</style>
+
+
+  <ion-view view-title="Conversation">
+
+
+<ion-content ng-controller="ConversationCtrl" delegate-handle="chatContent" class="content-stable messages"
+                 on-swipe-left="hideTime = false"
+                 on-swipe-right="hideTime = true">
+
+
+ 
+    <ion-item ng-show="!conversations.length">No recent messages</ion-item>
+    <div ng-repeat="conversation in conversations | orderBy:'createdAt'" ng-class="{other: conversation.user._id != userId}" class="messages">
+      <div class="message" ng-class="{'slide-right': hideTime, '': !hideTime}">
+          <span>{{conversation.body}}</span>
+        </div>
+
+        <div class="time" ng-class="{'slide-right': hideTime, '': !hideTime}">{{conversation.createdAt | date: 'short' }}</div>
+
+
+
+
+    </div>
+    <br><br>
+
+
+
+
+
+ </ion-content>
+
+ <ion-footer-bar keyboard-attach class="bar-stable item-input-inset">
+      <label class="item-input-wrapper">
+        <input type="text" placeholder="Type your message" on-return="sendMessage(); closeKeyboard()" ng-model="data.message" on-focus="inputUp()" on-blur="inputDown()" id="theSendMess" />
+      </label>
+      <button class="button button-clear" ng-click="sendMessage()">
+        Send
+      </button>
+    </ion-footer-bar>
+
+
+
+  </ion-view>
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+   <script id="boom.html" type="text/ng-template">
+    <ion-view view-title="Boom">
+      <ion-content class="padding">
+      Boom!
+        <div class="list">        
+          <label class="item item-divider">
+            Input types for popup keyboard
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Text</span>
+            <input type="text" ng-model="user.username">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="user.password">
+          </label>          
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="email">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Tel</span>
+            <input type="tel">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Number</span>
+            <input type="number">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Date</span>
+            <input type="date">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Month</span>
+            <input type="month">
+          </label> 
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>   
+
+  <script id="slidebox.html" type="text/ng-template">
+    <ion-view view-title="Slidebox">
+      <ion-content>
+        <ion-slide-box>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #1</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #2</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #3</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+       </ion-content>    
+    </ion-view>
+  </script> 
+    
+  <script id="about.html" type="text/ng-template">
+    <ion-view view-title="About">
+
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-email"></button>
+      </ion-nav-buttons>
+      
+      <ion-content class="padding">
+        <div class="card">
+          <div class="item">
+            <h3>Ionic Framework Kitchen Sink</h3>
+            <p>by <a href="http://twitter.com/krisrak" target="_blank">@krisrak</a></p>
+          </div>    
+        </div>
+      </ion-content>
+    </ion-view>
+  </script>    
+
+  <script id="modal.html" type="text/ng-template">
+    <div class="modal">
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Modal</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">To</span>
+            <input type="text">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Message</span>
+            <textarea rows="4"></textarea>
+          </label>
+        </div>
+        <button class="button icon icon-right ion-arrow-right-c button-balanced button-block">Send</button>
+      </ion-content>
+    </div>
+  </script>  
+
+
+  <script id="genericModal.html" type="text/ng-template">
+    <div class="modal">
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title" id="modalTitle">Modal</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+        
+        <div id="modalWords">
+
+        </div>
+        <button class="button icon icon-right ion-arrow-right-c button-balanced button-block" ng-click="modal.hide()">OK</button>
+      </ion-content>
+    </div>
+  </script>  
+
+
+
+ <!--object views-->
+
+<!--end object views-->
+
+
+
+
+
+
+
+
+
+ <ion-nav-bar class="bar-light">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+
+    <ion-nav-view></ion-nav-view>
+ <script id="intro.html" type="text/ng-template"> 
+
+ 
+      <ion-view view-title="Getting Started">
+        <ion-nav-buttons side="left">
+          <button class="button button-positive button-clear no-animation"
+                  ng-click="startApp()" ng-show="!slideIndex">
+            Skip Intro
+          </button>
+          <button class="button button-positive button-clear no-animation"
+                  ng-click="previous()" ng-show="slideIndex > 0">
+            Previous Slide
+          </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right"> 
+          <button class="button button-positive button-clear no-animation"
+                  ng-click="next()" ng-show="slideIndex != 2">
+            Next
+          </button>
+          <button class="button button-positive button-clear no-animation"
+                  ng-click="startApp()" ng-show="slideIndex == 2">
+            Start using MyApp
+          </button>
+        </ion-nav-buttons>
+        <ion-slide-box on-slide-changed="slideChanged(index)">
+          <ion-slide>
+            <h3>Thank you for choosing the Awesome App!</h3>
+            <div id="logo">
+              <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+            </div>
+            <p>
+              Weve worked super hard to make you happy.
+            </p>
+            <p>
+              But if you are angry, too bad.
+            </p>
+          </ion-slide>
+          <ion-slide>
+            <h3>Using Awesome</h3>
+            
+            <div id="list">
+              <h5>Just three steps:</h5>
+              <ol>
+                <li>Be awesome</li>
+                <li>Stay awesome</li>
+                <li>There is no step 3</li>
+              </ol>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <h3>Any questions?</h3>
+            <p>
+              Too bad!
+            </p>
+          </ion-slide>
+        </ion-slide-box>
+      </ion-view>
+    </script>
+
+
+
+
+
+
+
+
+
+  <!-- end pages-->
+ 
+</body>
+</html>

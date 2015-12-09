@@ -1,0 +1,25 @@
+.main_nav {background-color: #3e4dde;}
+#sn_container {background-color: #3e4dde;}
+.colorButton {background-color: #3e4dde;}
+.dedicated .price_box p {background-color: #3e4dde;}
+.button a {background-color: #3e4dde;}
+.title a {background-color: #3e4dde;}
+.form_domain .button {background-color: #3e4dde;}
+#blog .comments {background-color: #3e4dde;}
+#blog .blog_entry .read_more a {background-color: #3e4dde;}
+#contact .sidebar {background-color: #3e4dde;}
+footer a {color: #3e4dde;}
+.send a {background-color: #3e4dde;}
+#contact input#button {background-color: #3e4dde;}
+
+
+
+.main_nav .logo {background-color: #2634bd;}
+.main_nav .navigation nav.main_nav ul li.active, nav.main_nav2 ul li.active {background-color: #2634bd;}
+#contact .sidebar .location h4, #contact .sidebar .aditional_info h4 {background-color: #2634bd; box-shadow: inset 3px 3px 1px rgba(0, 0, 0, 0.1);}
+#contact .sidebar .location p, #contact .sidebar .aditional_info ul li {border-bottom:1px solid #2634bd;}
+
+h4#hide {background-color: #2634bd;}
+
+.responsive_nav {background-color: #3e4dde;}
+.mobileAreaMenu li:hover {background-color: #2634bd;}

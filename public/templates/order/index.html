@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <link href='/templates/order/https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link href='/templates/order/https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+  <!-- Bootstrap & Styles -->
+  <link href="/templates/order/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/templates/order/css/bootstrap-theme.min.css" rel="stylesheet">
+  <link href="/templates/order/css/block_grid_bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/owl.carousel.css">
+  <link rel="stylesheet" href="css/owl.theme.css">
+  <link rel="stylesheet" href="css/animate-custom.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/slicknav.min.css">
+  <link href="/templates/order/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+ <!-- ORDER SLIDER -->
+  <div class="pricingbox vps">
+    <div class="row">
+      <div class="col-sm-12">
+
+        <h1 class="text-center">Status</h1>
+
+        <div class="vps-prices-container">
+          <div id="vps_name_option"><h3><span class="how_much">VPS2</span></h3></div>
+          <div class="vps-prices-panel">
+            <div class="vps-prices-drag">
+              <div id="vps-slider"></div>
+              <div id="sliderlines"></div>
+            </div>
+
+            <div class="block-grid-sm-4 block-grid-xs-2 vps-item-features">
+
+              <div class="block-grid-item">
+                <div class="centralized"><div id="cpu_option"><h6>Step 1</h6><span class="how_much"></span></div></div>
+              </div>
+
+              <div class="block-grid-item">
+               <div class="centralized"><div id="memory_option"><h6>Step 2</h6><span class="how_much"></span></div></div>
+             </div>
+
+             <div class="block-grid-item">
+              <div class="centralized"><div id="disk_space_option"><h6>Step 3</h6><span class="how_much"></span></div></div>
+            </div>
+
+            <div class="block-grid-item">
+              <div class="centralized"><div id="bandwidth_option"><h6>Step 4</h6><span class="how_much"></span></div></div>
+            </div>
+
+          </div>
+
+          <div class="total_amount" style="display:none"><h3><span>$</span><span id="price_amount">39</span><span id="decimal">.99</span><span id="period">/m</span></h3></div>
+          <p class="text-center"><a class="mtr-btn button-purple ripple btn-lg order-vps" href="#">Review</a></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END OF ORDER SLIDER -->
+
+ 
+
+<!-- END O NEW PLANS -->
+
+
+<!-- SOCIAL & COPYRIGHT -->
+<div class="social">
+  <div class="row">
+    <div class="col-sm-12">
+   
+    <p class="text-center">© All rights reserved.</p>
+  </div>
+</div>
+</div>
+<!-- END OF SOCIAL & COPYRIGHT -->
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="LoginModal">
+  <div class="modal-dialog" role="document">
+    <form method="post" action="http://whmcs.audemedia.com/dologin.php?systpl=dataservwhmcs" class="material">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-lock"></i>LOGIN TO YOUR ACCOUNT</h4>
+        </div>
+        <div class="modal-body">
+          <input type="text" name="username" placeholder="E-mail Address">
+          <input type="password" name="password" placeholder="Password">
+          <button type="submit" class="mtr-btn button-fab">LOGIN</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- END OF LOGIN MODAL -->
+
+<a href="#top" id="back-to-top" class="ripple"><i class="fa fa-angle-up"></i></a>
+
+<script src="/templates/order/js/jquery.min.js"></script>
+<script src="/templates/order/js/bootstrap.min.js"></script>
+<script src="/templates/order/js/morphext.min.js"></script>
+<script src="/templates/order/js/hoverIntent.js"></script>
+<script src="/templates/order/js/superfish.min.js"></script>
+<script src="/templates/order/js/owl.carousel.js"></script>
+<script src="/templates/order/js/jquery-ui.min.js"></script>
+<script src="/templates/order/js/ripple-effect.js"></script>
+<script src="/templates/order/js/wow.min.js"></script>
+<script src="/templates/order/js/jquery.form.min.js"></script>
+<script src="/templates/order/js/jquery.slicknav.min.js"></script>
+<script src="/templates/order/js/retina.min.js"></script>
+<script src="/templates/order/js/custom.js"></script>
+<script>
+  (function($) {
+    "use strict";
+ // ______________ VPS SLIDER
+    (
+      function($, undefined) {
+        $.ui.slider.prototype.options =
+        $.extend({},
+          $.ui.slider.prototype.options, {
+            paddingMin: 0,
+            paddingMax: 0
+          }
+          );
+
+        $.ui.slider.prototype._refreshValue =
+        function() {
+          var
+          oRange = this.options.range,
+          o = this.options,
+          self = this,
+          animate = (!this._animateOff) ? o.animate : false,
+          valPercent,
+          _set = {},
+          elementWidth,
+          elementHeight,
+          paddingMinPercent,
+          paddingMaxPercent,
+          paddedBarPercent,
+          lastValPercent,
+          value,
+          valueMin,
+          valueMax;
+
+          if (self.orientation === "horizontal") {
+            elementWidth = this.element.outerWidth();
+            paddingMinPercent = o.paddingMin * 100 / elementWidth;
+            paddedBarPercent = (elementWidth - (o.paddingMin + o.paddingMax)) * 100 / elementWidth;
+          } else {
+            elementHeight = this.element.outerHeight();
+            paddingMinPercent = o.paddingMin * 100 / elementHeight;
+            paddedBarPercent = (elementHeight - (o.paddingMin + o.paddingMax)) * 100 / elementHeight;
+          }
+
+          if (this.options.values && this.options.values.length) {
+            this.handles.each(function(i, j) {
+              valPercent =
+              ((self.values(i) - self._valueMin()) / (self._valueMax() - self._valueMin()) * 100) * paddedBarPercent / 100 + paddingMinPercent;
+              _set[self.orientation === "horizontal" ? "left" : "bottom"] = valPercent + "%";
+              $(this).stop(1, 1)[animate ? "animate" : "css"](_set, o.animate);
+              if (self.options.range === true) {
+                if (self.orientation === "horizontal") {
+                  if (i === 0) {
+                    self.range.stop(1, 1)[animate ? "animate" : "css"]({
+                      left: valPercent + "%"
+                    }, o.animate);
+                  }
+                  if (i === 1) {
+                    self.range[animate ? "animate" : "css"]({
+                      width: (valPercent - lastValPercent) + "%"
+                    }, {
+                      queue: false,
+                      duration: o.animate
+                    });
+                  }
+                } else {
+                  if (i === 0) {
+                    self.range.stop(1, 1)[animate ? "animate" : "css"]({
+                      bottom: (valPercent) + "%"
+                    }, o.animate);
+                  }
+                  if (i === 1) {
+                    self.range[animate ? "animate" : "css"]({
+                      height: (valPercent - lastValPercent) + "%"
+                    }, {
+                      queue: false,
+                      duration: o.animate
+                    });
+                  }
+                }
+              }
+              lastValPercent = valPercent;
+            });
+} else {
+  value = this.value();
+  valueMin = this._valueMin();
+  valueMax = this._valueMax();
+  valPercent =
+  ((valueMax !== valueMin) ? (value - valueMin) / (valueMax - valueMin) * 100 : 0) * paddedBarPercent / 100 + paddingMinPercent;
+
+  _set[self.orientation === "horizontal" ? "left" : "bottom"] = valPercent + "%";
+
+  this.handle.stop(1, 1)[animate ? "animate" : "css"](_set, o.animate);
+
+  if (oRange === "min" && this.orientation === "horizontal") {
+    this.range.stop(1, 1)[animate ? "animate" : "css"]({
+      width: valPercent + "%"
+    }, o.animate);
+  }
+  if (oRange === "max" && this.orientation === "horizontal") {
+    this.range[animate ? "animate" : "css"]({
+      width: (100 - valPercent) + "%"
+    }, {
+      queue: false,
+      duration: o.animate
+    });
+  }
+  if (oRange === "min" && this.orientation === "vertical") {
+    this.range.stop(1, 1)[animate ? "animate" : "css"]({
+      height: valPercent + "%"
+    }, o.animate);
+  }
+  if (oRange === "max" && this.orientation === "vertical") {
+    this.range[animate ? "animate" : "css"]({
+      height: (100 - valPercent) + "%"
+    }, {
+      queue: false,
+      duration: o.animate
+    });
+  }
+}
+};
+
+$.ui.slider.prototype._normValueFromMouse =
+function(position) {
+  var
+  o = this.options,
+  pixelTotal,
+  pixelMouse,
+  percentMouse,
+  valueTotal,
+  valueMouse;
+
+  if (this.orientation === "horizontal") {
+    pixelTotal = this.elementSize.width - (o.paddingMin + o.paddingMax);
+    pixelMouse = position.x - this.elementOffset.left - o.paddingMin - (this._clickOffset ? this._clickOffset.left : 0);
+  } else {
+    pixelTotal = this.elementSize.height - (o.paddingMin + o.paddingMax);
+    pixelMouse = position.y - this.elementOffset.top - o.paddingMin - (this._clickOffset ? this._clickOffset.top : 0);
+  }
+
+  percentMouse = (pixelMouse / pixelTotal);
+  if (percentMouse > 1) {
+    percentMouse = 1;
+  }
+  if (percentMouse < 0) {
+    percentMouse = 0;
+  }
+  if (this.orientation === "vertical") {
+    percentMouse = 1 - percentMouse;
+  }
+
+  valueTotal = this._valueMax() - this._valueMin();
+  valueMouse = this._valueMin() + percentMouse * valueTotal;
+
+  return this._trimAlignValue(valueMouse);
+};
+}
+)(jQuery);
+      var vpsnameval = new Array('Started', 'Order Received', 'Processing', 'Delivered', 'In Review', 'Reviewed'); //VPS plan names
+      var memoryval = new Array('Started', 'Started', 'Started', 'Started', 'Started', 'Started'); //Memory array per plan
+      var cpuval = new Array('Order Received', 'Order Received', 'Order Received', 'Order Recieved', 'Order Received', 'Order Received'); //CPU array per plan
+      var diskspaceval = new Array('Processing', 'Processing', 'Processing', 'Processing','Processing', 'Processing'); //Disk Space array per plan
+      var bandwidthval = new Array('Delivered', 'Delivered', 'Delivered', 'Delivered','Delivered', 'Delivered'); //Bandwidth array per plan
+      var decimalval = new Array('.99', '.99', '.99', '.99', '.99', '.99'); //Decimal array per plan
+
+      var priceval = new Array('39', '69', '99', '129','159', '189'); //Price array per plan
+      var urlval = new Array('1', '2', '3', '4','5', '6'); //WHMCS pid array per plan
+
+      var finalurl = 'http://www.codeswatch.com/#'; //Update "whmcs.audemedia.com" with your WHMCS/billing system installation URL
+
+      var starting_point = 2; //Where the slider stops on first page load. Ideal to sign a plan as popular.
+
+      $(document).ready(function() {
+
+        $("#vps-slider").slider({
+          range: 'min',
+          animate: true,
+          min: 1,
+              max: 6, //Update this if you less or more plans
+              paddingMin: 0,
+              paddingMax: 0,
+              slide: function(event, ui) {
+                $('.vps-prices-container #vps_name_option span.how_much').html(vpsnameval[ui.value - 1]);
+                $('.vps-prices-container #disk_space_option span.how_much').html(diskspaceval[ui.value - 1]);
+                $('.vps-prices-container #memory_option span.how_much').html(memoryval[ui.value - 1]);
+                $('.vps-prices-container #cpu_option span.how_much').html(cpuval[ui.value - 1]);
+                $('.vps-prices-container #bandwidth_option span.how_much').html(bandwidthval[ui.value - 1]);
+                $('.vps-prices-container #price_amount').html(priceval[ui.value - 1]);
+                $('.vps-prices-container a.order-vps').attr('href', finalurl + urlval[ui.value - 1]);
+
+                $('.vps-prices-container #decimal').html(decimalval[ui.value - 1]);
+
+              },
+              change: function(event, ui) {
+                $('.vps-prices-container #vps_name_option span.how_much').html(vpsnameval[ui.value - 1]);
+                $('.vps-prices-container #disk_space_option span.how_much').html(diskspaceval[ui.value - 1]);
+                $('.vps-prices-container #memory_option span.how_much').html(memoryval[ui.value - 1]);
+                $('.vps-prices-container #cpu_option span.how_much').html(cpuval[ui.value - 1]);
+                $('.vps-prices-container #bandwidth_option span.how_much').html(bandwidthval[ui.value - 1]);
+                $('.vps-prices-container #price_amount').html(priceval[ui.value - 1]);
+                $('.vps-prices-container a.order-vps').attr('href', finalurl + urlval[ui.value - 1]);
+                $('.vps-prices-container #decimal').html(decimalval[ui.value - 1]);
+              }
+
+            });
+
+  $("#amount").val("$" + $("#vps-slider").slider("value"));
+  $('#vps-slider').slider('value', starting_point);
+  $('.vps-plan').click(function() {
+    tt_amount = parseInt(this.id.slice(5)) + 1;
+    $('#vps-slider').slider('how_much', tt_amount);
+  });
+});
+
+
+    $(document).ready(function() {
+    // ______________ DOMAIN SEARCH SHOW/HIDE
+    $('#showdomainsearch').click(function() {
+      $('.domainform').slideToggle("slow");
+    });
+
+    // ______________ TESTIMONIALS CAROUSEL
+    $("#testimonials-carousel").owlCarousel({
+      items: 3,
+      autoPlay: 5000,
+      itemsDesktop: [1199, 3],
+      itemsDesktopSmall: [979, 2],
+      itemsTablet: [768, 2]
+    });
+  });
+
+  })(jQuery);
+</script>
+</body>
+</html>

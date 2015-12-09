@@ -1,0 +1,30 @@
+ <div ng-controller="PhotoCtrl"><div class="photo">
+  <h3>
+    <a href="{{ '/photos/' + photo._id }}" title="{{ photo.title }}">
+      {{ photo.title }}
+    </a>
+  </h3>
+  <p>{{ photo.body }}</p>
+
+  <span class="muted">{{ photo.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+  {% if (photo.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + photo.user._id }}">
+      {{ photo.user.name || photo.user.username }}
+    </a>
+  {% endif %}
+
+  {% if (photo.tags) %}
+    &nbsp; - &nbsp;
+    <span>Tags: </span>
+    {% for tag in photo.tags.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>
+
+</div>

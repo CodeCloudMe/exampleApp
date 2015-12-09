@@ -1,0 +1,30 @@
+ <div ng-controller="BrowseCtrl"><div class="browse">
+  <h3>
+    <a href="{{ '/browses/' + browse._id }}" title="{{ browse.title }}">
+      {{ browse.title }}
+    </a>
+  </h3>
+  <p>{{ browse.body }}</p>
+
+  <span class="muted">{{ browse.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+  {% if (browse.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + browse.user._id }}">
+      {{ browse.user.name || browse.user.username }}
+    </a>
+  {% endif %}
+
+  {% if (browse.tags) %}
+    &nbsp; - &nbsp;
+    <span>Tags: </span>
+    {% for tag in browse.tags.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>
+
+</div>

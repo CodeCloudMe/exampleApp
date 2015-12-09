@@ -1,0 +1,28 @@
+ <div ng-controller="DetailCtrl">{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+  {% if (details.length) %}
+    {% for detail in details %}
+      {% include 'detail.html' %}
+    {% endfor %}
+
+    {% if (pages > 1) %}
+      <ul class="pagination">
+        {% autoescape false %}
+          {{ createPagination(pages, page) }}
+        {% endautoescape %}
+      </ul>
+    {% endif %}
+  {% else %}
+    <h4 class="muted">
+      No details.&nbsp;
+      <a href="/details/new">create one</a>
+    </h4>
+  {% endif %}
+{% endblock %}
+
+</div>

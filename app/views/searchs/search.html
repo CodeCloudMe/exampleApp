@@ -1,0 +1,30 @@
+ <div ng-controller="SearchCtrl"><div class="search">
+  <h3>
+    <a href="{{ '/searchs/' + search._id }}" title="{{ search.title }}">
+      {{ search.title }}
+    </a>
+  </h3>
+  <p>{{ search.body }}</p>
+
+  <span class="muted">{{ search.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+  {% if (search.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + search.user._id }}">
+      {{ search.user.name || search.user.username }}
+    </a>
+  {% endif %}
+
+  {% if (search.tags) %}
+    &nbsp; - &nbsp;
+    <span>Tags: </span>
+    {% for tag in search.tags.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>
+
+</div>

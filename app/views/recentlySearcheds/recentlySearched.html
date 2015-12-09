@@ -1,0 +1,30 @@
+ <div ng-controller="RecentlySearchedCtrl"><div class="recentlySearched">
+  <h3>
+    <a href="{{ '/recentlySearcheds/' + recentlySearched._id }}" title="{{ recentlySearched.title }}">
+      {{ recentlySearched.title }}
+    </a>
+  </h3>
+  <p>{{ recentlySearched.body }}</p>
+
+  <span class="muted">{{ recentlySearched.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+  {% if (recentlySearched.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + recentlySearched.user._id }}">
+      {{ recentlySearched.user.name || recentlySearched.user.username }}
+    </a>
+  {% endif %}
+
+  {% if (recentlySearched.tags) %}
+    &nbsp; - &nbsp;
+    <span>Tags: </span>
+    {% for tag in recentlySearched.tags.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>
+
+</div>

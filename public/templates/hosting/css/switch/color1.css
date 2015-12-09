@@ -1,0 +1,21 @@
+.main_nav {background-color: #ca662a;}
+.main_nav .logo {background-color: #a74f1a;}
+.main_nav .navigation nav.main_nav ul li.active, nav.main_nav2 ul li.active {background-color: #a74f1a;}
+#sn_container {background-color: #ca662a;}
+.colorButton {background-color: #ca662a;}
+.dedicated .price_box p {background-color: #ca662a;}
+.button a {background-color: #ca662a;}
+.title a {background-color: #ca662a;}
+.form_domain .button {background-color: #ca662a;}
+#blog .comments {background-color: #ca662a;}
+#blog .blog_entry .read_more a {background-color: #ca662a;}
+#contact .sidebar {background-color: #ca662a;}
+#contact .sidebar .location h4, #contact .sidebar .aditional_info h4 {background-color: #a74f1a; box-shadow: inset 3px 3px 1px rgba(0, 0, 0, 0.1);}
+footer a {color: #ca662a;}
+.send a {background-color: #ca662a;}
+#contact input#button {background-color: #ca662a;}
+#contact .sidebar .location p, #contact .sidebar .aditional_info ul li {border-bottom:1px solid #a74f1a;}
+h4#hide {background-color: #ca662a;}
+
+.responsive_nav {background-color: #ca662a;}
+.mobileAreaMenu li:hover {background-color: #a74f1a;}

@@ -1,0 +1,8 @@
+ app.param('messageId', messages.load);
+  app.get('/messages', messages.index);
+  app.get('/messages/new', auth.requiresLogin, messages.new);
+  app.post('/messages', auth.requiresLogin, messages.create);
+  app.get('/messages/:messageId', messages.show);
+  app.get('/messages/:messageId/edit', messageAuth, messages.edit);
+  app.put('/messages/:messageId', messageAuth, messages.update);
+  app.delete('/messages/:messageId', messageAuth, messages.destroy);

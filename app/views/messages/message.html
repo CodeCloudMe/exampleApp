@@ -1,0 +1,30 @@
+ <div ng-controller="MessageCtrl"><div class="message">
+  <h3>
+    <a href="{{ '/messages/' + message._id }}" title="{{ message.title }}">
+      {{ message.title }}
+    </a>
+  </h3>
+  <p>{{ message.body }}</p>
+
+  <span class="muted">{{ message.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+  {% if (message.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + message.user._id }}">
+      {{ message.user.name || message.user.username }}
+    </a>
+  {% endif %}
+
+  {% if (message.tags) %}
+    &nbsp; - &nbsp;
+    <span>Tags: </span>
+    {% for tag in message.tags.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>
+
+</div>

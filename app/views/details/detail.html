@@ -1,0 +1,30 @@
+ <div ng-controller="DetailCtrl"><div class="detail">
+  <h3>
+    <a href="{{ '/details/' + detail._id }}" title="{{ detail.title }}">
+      {{ detail.title }}
+    </a>
+  </h3>
+  <p>{{ detail.body }}</p>
+
+  <span class="muted">{{ detail.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+  {% if (detail.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + detail.user._id }}">
+      {{ detail.user.name || detail.user.username }}
+    </a>
+  {% endif %}
+
+  {% if (detail.tags) %}
+    &nbsp; - &nbsp;
+    <span>Tags: </span>
+    {% for tag in detail.tags.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>
+
+</div>

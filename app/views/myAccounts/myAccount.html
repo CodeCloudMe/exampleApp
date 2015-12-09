@@ -1,0 +1,30 @@
+ <div ng-controller="MyAccountCtrl"><div class="myAccount">
+  <h3>
+    <a href="{{ '/myAccounts/' + myAccount._id }}" title="{{ myAccount.title }}">
+      {{ myAccount.title }}
+    </a>
+  </h3>
+  <p>{{ myAccount.body }}</p>
+
+  <span class="muted">{{ myAccount.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+
+  {% if (myAccount.user) %}
+    &nbsp; - &nbsp;
+    <span>Author: </span>
+    <a href="{{ '/users/' + myAccount.user._id }}">
+      {{ myAccount.user.name || myAccount.user.username }}
+    </a>
+  {% endif %}
+
+  {% if (myAccount.tags) %}
+    &nbsp; - &nbsp;
+    <span>Tags: </span>
+    {% for tag in myAccount.tags.split(',') %}
+      <i class="muted fa fa-tag"></i>&nbsp;
+      <a href="{{ '/tags/' + tag }}" class="tag">{{ tag }}</a>
+      &nbsp;&nbsp;
+    {% endfor %}
+  {% endif %}
+</div>
+
+</div>

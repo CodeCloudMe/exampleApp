@@ -1,0 +1,362 @@
+{% extends '../layouts/default.html' %}
+
+{% block main %}
+  <h1>{{ user.name || user.username }}</h1>
+ 
+<!-- include '../../../public/templates/profile/index.html' -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <br>
+  <h3>Comments</h3>
+
+
+  {% for comment in user.comments %}
+   
+
+
+
+{% if (comment && comment.user) %}
+  <div class="comment">
+    {% if (comment.user.name) %}
+      {% set name = comment.user.name %}
+    {% else %}
+      {% set name = comment.user.username %}
+    {% endif %}
+
+    <p>
+      <a href="{{ '/users/' + comment.user._id }}">{{ name }}</a>
+      :&nbsp;
+      {{ comment.body }}
+    </p>
+
+    <!-- <p class="muted"> -->
+
+
+      <form role="form" method="post" action="{{ '/users/' + user._id + '/comments/' + comment._id }}" onsubmit="return confirm('Are you sure?')" class="form-inline">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+
+
+
+        <span class="muted">{{ comment.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger btn-link error" type="submit">delete</button>
+      </form>
+    <!-- </p> -->
+  </div>
+{% endif %}
+
+
+
+
+
+
+
+
+  {% endfor %}
+  
+
+
+
+
+
+  <form method="post" action="{{ '/users/' + user._id + '/comments' }}" role="form">
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+   <input type="hidden" name="toUser" value="{{  user._id + ''}}">
+  <div class="form-group">
+    <textarea rows="6" name="body" placeholder="Add your comment" id="" cols="30" rows="10" class="form-control"></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Add comment</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <br>
+  <h3>Ratings</h3>
+  {% for rating in user.ratings %}
+
+
+
+
+{% if (rating && rating.user) %}
+  <div class="comment">
+    {% if (rating.user.name) %}
+      {% set name = rating.user.name %}
+    {% else %}
+      {% set name = rating.user.username %}
+    {% endif %}
+
+    <p>
+      <a href="{{ '/users/' + rating.user._id }}">{{ name }}</a>
+      :&nbsp;
+      {{ rating.rating }}
+    </p>
+
+    <!-- <p class="muted"> -->
+      <form role="form" method="post" action="{{ '/user/' + user._id + '/ratings/' + rating._id }}" onsubmit="return confirm('Are you sure?')" class="form-inline">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <span class="muted">{{ rating.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger btn-link error" type="submit">delete</button>
+      </form>
+    <!-- </p> -->
+  </div>
+{% endif %}
+
+
+
+
+
+
+
+
+  {% endfor %}
+  
+
+
+
+
+
+
+  <form method="post" action="{{ '/user/' + user._id + '/ratings' }}" role="form">
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+  <div class="form-group">
+    <textarea rows="6" name="rating" placeholder="Add your rating" id="" cols="30" rows="10" class="form-control"></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Add rating</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+  <br>
+  <h3>Likes</h3>
+  {% for like in user.likes %}
+
+
+
+
+{% if (like && like.user) %}
+  <div class="comment">
+
+    a user liked this<br>
+    {% if (like.user.name) %}
+      {% set name = like.user.name %}
+    {% else %}
+      {% set name = like.user.username %}
+    {% endif %}
+
+    <p>
+      <a href="{{ '/users/' + like.user._id }}">{{ name }}</a>
+      :&nbsp;
+      {{ like.like }}
+    </p>
+
+    <!-- <p class="muted"> -->
+      <form role="form" method="post" action="{{ '/user/' + user._id + '/likes/' + like._id }}" onsubmit="return confirm('Are you sure?')" class="form-inline">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <span class="muted">{{ like.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger btn-link error" type="submit">delete</button>
+      </form>
+    <!-- </p> -->
+  </div>
+{% endif %}
+
+
+
+
+
+
+
+
+  {% endfor %}
+  
+
+
+
+
+
+
+  <form method="post" action="{{ '/user/' + user._id + '/likes' }}" role="form">
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+  <div class="form-group">
+    <textarea rows="6" name="like" placeholder="Add your like" id="" cols="30" rows="10" class="form-control"></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Add like</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+  <br>
+  <h3>Categories</h3>
+  {% for category in user.categories %}
+
+
+
+
+{% if (category && category.user) %}
+  <div class="comment">
+
+    a user categoryd this<br>
+    {% if (category.user.name) %}
+      {% set name = category.user.name %}
+    {% else %}
+      {% set name = category.user.username %}
+    {% endif %}
+
+    <p>
+      <a href="{{ '/users/' + category.user._id }}">{{ name }}</a>
+      :&nbsp;
+      {{ category.category }}
+    </p>
+
+    <!-- <p class="muted"> -->
+      <form role="form" method="post" action="{{ '/user/' + user._id + '/categories/' + category._id }}" onsubmit="return confirm('Are you sure?')" class="form-inline">
+        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+        <span class="muted">{{ category.createdAt.toISOString()|date('M d, Y  h:i a') }}</span>
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-danger btn-link error" type="submit">delete</button>
+      </form>
+    <!-- </p> -->
+  </div>
+{% endif %}
+
+
+
+
+
+
+
+
+  {% endfor %}
+  
+
+
+
+
+
+
+  <form method="post" action="{{ '/user/' + user._id + '/categories' }}" role="form">
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+  <div class="form-group">
+    <textarea rows="6" name="category" placeholder="Add your category" id="" cols="30" rows="10" class="form-control"></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Add category</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+  
+{% endblock %}
