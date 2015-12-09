@@ -1,64 +1,105 @@
-[![Build Status](https://img.shields.io/travis/madhums/node-express-mongoose-demo.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose-demo)
-[![Gittip](https://img.shields.io/gratipay/madhums.svg?style=flat)](https://www.gratipay.com/madhums/)
-[![Dependencies](https://img.shields.io/david/madhums/node-express-mongoose-demo.svg?style=flat)](https://david-dm.org/madhums/node-express-mongoose-demo)
-[![Code climate](http://img.shields.io/codeclimate/github/madhums/node-express-mongoose-demo.svg?style=flat)](https://codeclimate.com/github/madhums/node-express-mongoose-demo)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/madhums/node-express-mongoose-demo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+CodeSwatch
 
-# Nodejs Express Mongoose Demo
+Pluggable App Development Framework
 
-This is a demo node.js application illustrating various features used in everyday web development, with a fine touch of best practices. The demo app is a blog application where users (signing up using facebook, twitter, github and simple registrations) can create an article, delete an article and add comments on the article.
+__
 
-## Boilerplate
 
-Want to build something from scratch? use the [boilerplate app](https://github.com/madhums/node-express-mongoose)
+In Briefx
+CodeSwatch makes apps. This JavaScript framework organizes code in a manner great for collaboration. The vast majority of CodeSwatch-based apps will require less than 20% human-written code. This human-written code is leveraged to fully customize CodeSwatch functionality to bring forth almost limitless options in the kinds of apps created.
+This is called a “pluggable” app development framework because both:
+a)	desired hybrid apps based on the functionality of popular technologies, acting as almost specifications for these CodeSwatch-based hybrid apps.
+b)	This framework is fully customizable and modular in a way that allows for easy removal and inclusion of functionality and design.
 
-* Checkout the [apps that are built using this approach](https://github.com/madhums/node-express-mongoose/wiki/Apps-built-using-this-approach)
-* The [wiki](https://github.com/madhums/node-express-mongoose/wiki) is wip, it has some information about the way application is setup.
 
-## Requirements
+Introduction
+The CodeSwatch Framework is based on Madhusudhan Srinivasa’s Node-Express-Mongoose project (MIT License), which to-date, along with its Demo application, has been forked over one thousand times, receiving over 3,000 stars.  Mike De’Shazer worked from the core of Srinivasa’s code and added the JavasScript-based Ionic Framework (MIT License) to develop a framework for complete app development on mobile platforms, as well as the web, to develop both:
+a)	the Factory which uses the CodeSwatch framework to build apps
+b)	 CodeSwatch-based apps (or “Flavor Homes”) developed via the Factory
 
-* [NodeJs](http://nodejs.org)
-* [mongodb](http://mongodb.org)
-* [imagemagick](http://www.imagemagick.org/script/index.php)
 
-## Install
+The CodeSwatch framework
+ The CodeSwatch framework has a file structure such that at the root consists of:
 
-```sh
-$ git clone git://github.com/madhums/node-express-mongoose-demo.git
-$ npm install
-```
+app
+The core functionality of the web and RESTful API accur here.
+Controllers determine which models should used and how views should renders data.
+Views contain the  HTML templates, leveraging assets from the public folder.
+Models contain the schema for data structure . Most data structures of extend generic  CodeSwatch data schema, containing usually the attributes of “email”, “location”, “availabilitySlots” to allow communication between almost any object in the CodeSwatch framework.
 
-**NOTE:** Do not forget to set the facebook, twitter, google, linkedin and github `CLIENT_ID`s and `SECRET`s. In `development` env, you can simply copy
-`config/env/env.example.json` to `config/env/env.json` and just replace the
-values there. In production, it is not safe to keep the ids and secrets in
-a file, so you need to set it up via commandline. If you are using heroku
-checkout how environment variables are set [here](https://devcenter.heroku.com/articles/config-vars).
 
-If you want to use image uploads, don't forget to set env variables for the
-imager config.
+config
+Consists of the routes.js file, which determines which address endpoints lead to which controllers (which then link to a HTML or JSON-based) view, leveraging content from the models. 
+Additionally is the env folder, which declares environment variables on the server for security and protection of client IDs, API secrets, and other credentials. Middlewares which helps prevent race conditions for end-users accessing and manipulating content, mandating by default for example, users should be able to only edit content they can upload. 
 
-```sh
-$ export IMAGER_S3_KEY=AWS_S3_KEY
-$ export IMAGER_S3_SECRET=AWS_S3_SECRET
-$ export IMAGER_S3_BUCKET=AWS_S3_BUCKET
-```
+lib
+The lib folder contains one file, which formats Mongo errors in a proper way. 
 
-then
+node_modules
+Extensions to functionality is stored here in folders by the name of the modules acting as extenstions. One module is the Express framework, which we use within the CodeSwatch framework. Other modules are less notable, such as the imagemagick module, which is only used, say if we are uploading content to an Amazon, IBM, etc cloud. 
 
-```sh
-$ npm start
-```
 
-(Note: When you do npm start, `NODE_PATH` variable is set from package.json start script. If you are doing `node server.js`, you need to make sure to set this)
+public
+Most css and javascript files are located here in the assets, js, and css folders.
+The image uploads when working in a local development environment as save in uploads folder. Additionally, mobile app code for iOS and android are stored here, respectively in the android and ios folders, in public/mobileApp. (also see public/mobileApp/main).
 
-Then visit [http://localhost:3000/](http://localhost:3000/)
+test
+Basic unit and functionality tests are written for ensuring the functionality of article and user functionality throughout the application for the should and super_test modules.
 
-## Tests
+(and hidden folders below)
+.openshift 
+Contains runtime exectubales, as well as other configuration for a given project set to live on the portable OpenShift app.
 
-```sh
-$ npm test
-```
+.git
+git repository folder, keeping track of each commit and branches within a project.
 
-## License
 
-MIT
+(with these folders notably, which contain front-end code and markup)
+public/mobileApp
+Here, all Ionic code is stored for the front-end of the Android and iOS applications. Blackberry, WindowsOS, and other mobile platform could be stored here, as well.
+
+public/templates
+Licensed and open-source code for the website for each application. Most templates contained are responsive for all screen dimensions, if not all. Event pages, calendar pages, homepages, messenger UIs, dashboard UIs, depending on the project are present here for use by app/views code.
+
+
+The Factory: Swatch & Sons
+The Factory, nicknamed “Swatch & Sons” is a set of scripts which previously exist in the config/generator directly which leverage code through to project and uses design/coding patterns to generate a specific application based on specificaitons generalized through the use of common, popular application (Such as Uber or AirBnB).
+
+
+The Store: CodeSwatch.com
+This is a web portal through which innovators can mash-up and integrate functionality between popular applications and for various types of users or objects, such as artists or photos. A specification might be an AirBnB & Youtube for Artists and Companies. The CodeSwatch Idea Generator can then give the innovator choices ranging from “video uploader for artists and companies with booking features” to “e-commerce platform for artists and companies with content upload features.”
+
+
+The Flavor Home
+CodeSwatch-based apps are usually designed via a specification of combinations of flavors in the CodeSwatch Store. Flavors refer to sets of functionality (or swatches) that combine to make flavors like Youtube, Facebook, Twitter or Netflix.  A Twitter-Youtube mashup might resemble Vine in functionality. A CodeSwatch-based app is a Flavor Home, where one or more flavor types hav combined to host users that enter them in some way, shape or form.
+
+The Foundation: Core Datasets
+The Core Datasets that drive how a CodeSwatch Flavor Home is generated are:
+a)	Swatches dataset
+b)	Objects Dataset
+
+
+Structural Skeletons: Swatches
+
+Inside each application, in the app folder, in views, is layouts folder. Inside that folder, there is head.html file, which references angular and csApp.js. Included in every csApp.js contains all code that connects back-end services with the view (this is in public/asset/js) .This is auto-generated I the factory and can be edited to change how the DOM manipulates based on your logic. There is no need to put functionality in the DOM
+, but to use Angular, as demonstrated by example. In default.html, the primary skeleton of each page includes the body tag of ng-app. The value of this attribute is “SwatchCtrl”. The csApp.js, has much of the data your app needs stored here.
+
+
+Deploy This App
+To deploy this app locally, run:
+npm install
+This will get the modules
+Then, start your local mongo server
+Once the Mongo server is running, run:
+node server.js
+You should be able to see the code at localhost:8080
+From here, you can make the changes you would like. To see server side changes, press Ctrl-C to stop the server. Then node server.js to run it again.
+
+Once you have your changes, create an Openshift.com account. 
+Create a node catridge. Then pull that node catrdige down. Then overwite the files with the files from this repo. From there, push it back up. Your app should now be running in the cloud.
+
+
+
+
+
+
