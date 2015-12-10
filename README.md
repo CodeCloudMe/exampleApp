@@ -10,12 +10,18 @@ __
 Deploy This App
 
 To deploy this app locally, run:
+
 npm install
+
 This will get the modules
-Then, start your local mongo server
+
+Then, start your local mongo server.
 Once the Mongo server is running, run:
+
 node server.js
+
 You should be able to see the code at localhost:8080
+
 From here, you can make the changes you would like. To see server side changes, press Ctrl-C to stop the server. Then node server.js to run it again.
 
 Once you have your changes, create an Openshift.com account. 
