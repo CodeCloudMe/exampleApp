@@ -15,7 +15,7 @@ module.exports = function (grunt) {
     './config/**/*.js',
     './configLib/**/*.js',
     './lib/**/*.js',
-    './test/**/*.js',
+    './test/**/*.js'
   ];
 
   // Project configuration.
@@ -81,4 +81,6 @@ module.exports = function (grunt) {
     'jsbeautifier:verify',
     'jscs'
   ]);
+
+  grunt.registerTask('format', ['jsbeautifier:modify']);
 };
