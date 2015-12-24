@@ -12,6 +12,44 @@ var house = angular.module('SwatchApp', [])
 })
 })
 
+.controller('test', function($scope, $http, $parse) {
+	console.log('heyheyhey');
+
+   $scope.typeOptions = [
+	{ name: 'Tunisia', value: 'Tunisia' }, 
+	{ name: 'USA', value: 'USA' }, 
+	{ name: 'France', value: 'France' },
+	{ name: 'Spain', value: 'Spain' }
+	];
+	$scope.change = function()
+	{
+	document.getElementsByName("country")[0].value = $scope.form.type;
+console.log(document.getElementsByName("country")[0].value);	
+
+  
+	}
+
+	
+	$scope.form = {type : $scope.typeOptions[0].value};
+
+})
+
+.controller('passwordChanging', function($scope, $http) {
+	console.log('password changing');
+
+
+  $scope.test = function(){
+	
+  }
+ $scope.disable= function(){
+
+	if(($scope.newpass1 == $scope.newpass2) && ($scope.newpass1))
+	return false;
+  return true;
+ 
+  }
+})
+
 .controller('CoderCtrl', function($scope, $http) {
 	$http.get('/coders?format=json').then(function(resp) {
 	console.log('Success', resp);

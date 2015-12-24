@@ -26,16 +26,26 @@ var oAuthTypes = [
 var UserSchema = new Schema({
   name: { type: String, default: '' },
   email: { type: String, default: '' },
+  city: { type: String, default: '' },
+  country: { type: String, default: '' },
+  occupation: { type: String, default: '' },
+  website: { type: String, default: '' },
+  company: { type: String, default: '' },
   username: { type: String, default: '' },
+  sectionTitle : { type: String, default: '' },
+  description: { type: String, default: '' },
   provider: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
   salt: { type: String, default: '' },
   authToken: { type: String, default: '' },
+  linkDescription: { type: String, default: '' },
+  linkTitle : { type: String, default: '' },
   facebook: {},
   twitter: {},
   github: {},
   google: {},
   linkedin: {},
+  pinterest:{},
 
 
   comments: [{
@@ -181,6 +191,11 @@ UserSchema.methods = {
 
   authenticate: function (plainText) {
     return this.encryptPassword(plainText) === this.hashed_password;
+  },
+
+    changePassword: function (exPassword,newPassword1,newPassword2) {
+    
+     return((this.encryptPassword(exPassword) === this.hashed_password) && (newPassword1 === newPassword2));
   },
 
   /**

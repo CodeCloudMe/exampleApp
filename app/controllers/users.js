@@ -91,6 +91,14 @@ exports.create = function (req, res) {
   });
 };
 
+exports.changePassword = function (req, res) {
+  var user = req.profile;
+  
+
+
+};
+
+
 exports.info = function (req, res) {
   
   var info = req.session;
@@ -214,6 +222,7 @@ exports.edit = function (req, res) {
    if(req.query.format=="json"){
     res.send( {
       title: req.user.username,
+
       user: req.user
     });
    }
@@ -221,6 +230,7 @@ exports.edit = function (req, res) {
    else{
     res.render('users/edit', {
       title: req.user.username,
+     
       user: req.user
     });
   }
