@@ -54,15 +54,18 @@ Type yes to all other prompts
 
 You should now be able to refresh openshift in your broswer, and on the individual app page, see your ssh address, hich you will add a remote repository in your console
 
-In a folder such as Desktop/apps, run rhc git-clone <yourAppName>
+In your exampleApp folder that you cloned (this repo), add your openshift remote address like so: git remote add openshift ssh://yourUrlFromOpenShift
 
-It will create a directory there. Copy all your files from your exampleApp, minus the .git file/folder and paste it into the new cloned directory
+
+
 
 In that directory in your console, run: git add -A
 
 then, run: git commit -m "initial commit for opneshift"
 
-now run: git push
+now run: git push --force
+
+This will overwrite the code on Openshift and make it the same as your guthub code.
 
 After a few minutes, once all the node modules and your code is deployed remotely, you should be able to go to the app's url and see the code running.
 
