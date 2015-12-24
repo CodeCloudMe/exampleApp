@@ -19,7 +19,7 @@ var Schema = mongoose.Schema;
  */
 
 var getTags = function (tags) {
-  return tags.join(',');
+    return tags.join(',');
 };
 
 /**
@@ -27,7 +27,7 @@ var getTags = function (tags) {
  */
 
 var setTags = function (tags) {
-  return tags.split(',');
+    return tags.split(',');
 };
 
 /**
@@ -35,60 +35,60 @@ var setTags = function (tags) {
  */
 
 var ArticleSchema = new Schema({
-  title: {type : String, default : '', trim : true},
-  body: {type : String, default : '', trim : true},
-  user: {type : Schema.ObjectId, ref : 'User'},
-  comments: [{
-    body: { type : String, default : '' },
-    user: { type : Schema.ObjectId, ref : 'User' },
-    createdAt: { type : Date, default : Date.now }
-  }],
-  ratings: [{
-    rating: { type : Number, default : 3 },
-    user: { type : Schema.ObjectId, ref : 'User' },
-    createdAt: { type : Date, default : Date.now }
-  }],
+    title: {type : String, default : '', trim : true},
+    body: {type : String, default : '', trim : true},
+    user: {type : Schema.ObjectId, ref : 'User'},
+    comments: [{
+        body: { type : String, default : '' },
+        user: { type : Schema.ObjectId, ref : 'User' },
+        createdAt: { type : Date, default : Date.now }
+    }],
+    ratings: [{
+        rating: { type : Number, default : 3 },
+        user: { type : Schema.ObjectId, ref : 'User' },
+        createdAt: { type : Date, default : Date.now }
+    }],
 
-  likes: [{
-    user: { type : Schema.ObjectId, ref : 'User' },
-    createdAt: { type : Date, default : Date.now }
-  }],
+    likes: [{
+        user: { type : Schema.ObjectId, ref : 'User' },
+        createdAt: { type : Date, default : Date.now }
+    }],
 
-   categories: [{
-    category: { type :String, default :'default'},
-    user: { type : Schema.ObjectId, ref : 'User' },
-    createdAt: { type : Date, default : Date.now }
-  }],
+    categories: [{
+        category: { type :String, default :'default'},
+        user: { type : Schema.ObjectId, ref : 'User' },
+        createdAt: { type : Date, default : Date.now }
+    }],
 
-  tags: {type: [], get: getTags, set: setTags},
-  image: {
-    cdnUri: String,
-    files: []
-  },
-  createdAt  : {type : Date, default : Date.now},
+    tags: {type: [], get: getTags, set: setTags},
+    image: {
+        cdnUri: String,
+        files: []
+    },
+    createdAt  : {type : Date, default : Date.now},
 
-  //added
-  media: [{
-    url: { type : String, default : '' },
-    type: { type : String, default : '' },
-    files: [],
-    createdAt: { type : Date, default : Date.now }
-  }],
-  location: {type: [Number], default: [-74.0059, 40.7127], index: '2dsphere' },
-  //loc:{ type: {type : String, default : 'Point', index:true}, coordinates: {type: [Number], default: [-74.0059, 40.7127], index: '2dsphere' }},
-   
-  //type: String, default : 'Point' 
-  type: {type : String, default : 'Point', index:true},
-  updatedAt  : {type : Date, default : Date.now},
-  price:{type: Number, default:0.00},
-  rating:{type: Number, default:0.00},
-  numRatings:{type: Number, default:0},
-  email: {type : String, default : '', index:true},
-  startDate: { type : Date, default : Date.now },
-  endDate: { type : Date },
-  availableNow: { type : Boolean, default:false },
-  availabilitySlots: {type: []},
-  accessSecret:{type : String, default : ''}
+    //added
+    media: [{
+        url: { type : String, default : '' },
+        type: { type : String, default : '' },
+        files: [],
+        createdAt: { type : Date, default : Date.now }
+    }],
+    location: {type: [Number], default: [-74.0059, 40.7127], index: '2dsphere' },
+    //loc:{ type: {type : String, default : 'Point', index:true}, coordinates: {type: [Number], default: [-74.0059, 40.7127], index: '2dsphere' }},
+
+    //type: String, default : 'Point'
+    type: {type : String, default : 'Point', index:true},
+    updatedAt  : {type : Date, default : Date.now},
+    price:{type: Number, default:0.00},
+    rating:{type: Number, default:0.00},
+    numRatings:{type: Number, default:0},
+    email: {type : String, default : '', index:true},
+    startDate: { type : Date, default : Date.now },
+    endDate: { type : Date },
+    availableNow: { type : Boolean, default:false },
+    availabilitySlots: {type: []},
+    accessSecret:{type : String, default : ''}
 
 
 });
@@ -111,16 +111,16 @@ ArticleSchema.path('body').required(true, 'Article body cannot be blank');
  */
 
 ArticleSchema.pre('remove', function (next) {
-  /*
-  var imager = new Imager(imagerConfig, 'S3');
-  var files = this.image.files;
+    /*
+     var imager = new Imager(imagerConfig, 'S3');
+     var files = this.image.files;
 
-  // if there are files associated with the item, remove from the cloud too
-  imager.remove(files, function (err) {
-    if (err) return next(err);
-  }, 'article');
-*/
-  next();
+     // if there are files associated with the item, remove from the cloud too
+     imager.remove(files, function (err) {
+     if (err) return next(err);
+     }, 'article');
+     */
+    next();
 });
 
 /**
@@ -129,115 +129,115 @@ ArticleSchema.pre('remove', function (next) {
 
 ArticleSchema.methods = {
 
-  /**
-   * Save article and upload image
-   *
-   * @param {Object} images
-   * @param {Function} cb
-   * @api private
-   */
+    /**
+     * Save article and upload image
+     *
+     * @param {Object} images
+     * @param {Function} cb
+     * @api private
+     */
 
-  uploadAndSave: function (images, cb) {
-    if (!images || !images.length) return this.save(cb)
+    uploadAndSave: function (images, cb) {
+        if (!images || !images.length) return this.save(cb)
 
-      console.log(images);
-    var fs = require('fs');
-    //create uploads folder if it doesn't exsit
-      try{
+        console.log(images);
+        var fs = require('fs');
+        //create uploads folder if it doesn't exsit
+        try{
 
-       var statsFolder = fs.lstatSync('./public/uploads/');
-       fs.createReadStream(images[0]['path']).pipe(fs.createWriteStream('./public/uploads/'+images[0]['name']))
+            var statsFolder = fs.lstatSync('./public/uploads/');
+            fs.createReadStream(images[0]['path']).pipe(fs.createWriteStream('./public/uploads/'+images[0]['name']))
 
-      }
-      catch(err){
-        console.log('uploads Folder doesnt exist. create /public/uploads folder');
+        }
+        catch(err){
+            console.log('uploads Folder doesnt exist. create /public/uploads folder');
 
-        fs.mkdir('./public/uploads/',function(e){
-            
-          console.log('created uploads folder')
-          fs.createReadStream(images[0]['path']).pipe(fs.createWriteStream('./public/uploads/'+images[0]['name']))
+            fs.mkdir('./public/uploads/',function(e){
+
+                console.log('created uploads folder')
+                fs.createReadStream(images[0]['path']).pipe(fs.createWriteStream('./public/uploads/'+images[0]['name']))
+            });
+        }
+
+
+
+        console.log('save upload')
+        ;
+
+        //if using amazon...
+        //var imager = new Imager(imagerConfig, 'S3');
+        var self = this;
+
+        this.validate(function (err) {
+            if (err) {
+                console.log("error:"+err);
+                return cb(err);
+
+            }
+
+
+            if (images.length) {
+                self.image = { cdnUri : '/uploads/'+images[0]['name'], files : images };
+            }
+            self.save(cb);
+
+
+            /*
+             imager.upload(images, function (err, cdnUri, files) {
+             if (err) {
+             console.log("error1:"+err);
+             return cb(err);
+
+             }
+             if (files.length) {
+             self.image = { cdnUri : cdnUri, files : files };
+             }
+             self.save(cb);
+             }, 'article');*/
         });
-      }
+    },
 
-    
-    
-    console.log('save upload')
-    ;
+    /**
+     * Add comment
+     *
+     * @param {User} user
+     * @param {Object} comment
+     * @param {Function} cb
+     * @api private
+     */
 
-    //if using amazon...
-    //var imager = new Imager(imagerConfig, 'S3');
-    var self = this;
+    addComment: function (user, comment, cb) {
+        // var notify = require('../mailer');
 
-    this.validate(function (err) {
-      if (err) {
-        console.log("error:"+err);
-        return cb(err);
+        this.comments.push({
+            body: comment.body,
+            user: user._id
+        });
+        /*
+         if (!this.user.email) this.user.email = 'email@product.com';
+         notify.comment({
+         article: this,
+         currentUser: user,
+         comment: comment.body
+         });
+         */
+        this.save(cb);
+    },
 
-      }
-       
-      
-        if (images.length) {
-          self.image = { cdnUri : '/uploads/'+images[0]['name'], files : images };
-        }
-        self.save(cb);
-      
+    /**
+     * Remove comment
+     *
+     * @param {commentId} String
+     * @param {Function} cb
+     * @api private
+     */
 
-      /*
-      imager.upload(images, function (err, cdnUri, files) {
-        if (err) {
-        console.log("error1:"+err);
-        return cb(err);
-
-      }
-        if (files.length) {
-          self.image = { cdnUri : cdnUri, files : files };
-        }
-        self.save(cb);
-      }, 'article');*/
-    });
-  },
-
-  /**
-   * Add comment
-   *
-   * @param {User} user
-   * @param {Object} comment
-   * @param {Function} cb
-   * @api private
-   */
-
-  addComment: function (user, comment, cb) {
-   // var notify = require('../mailer');
-
-    this.comments.push({
-      body: comment.body,
-      user: user._id
-    });
-/*
-    if (!this.user.email) this.user.email = 'email@product.com';
-    notify.comment({
-      article: this,
-      currentUser: user,
-      comment: comment.body
-    });
-*/
-    this.save(cb);
-  },
-
-  /**
-   * Remove comment
-   *
-   * @param {commentId} String
-   * @param {Function} cb
-   * @api private
-   */
-
-  removeComment: function (commentId, cb) {
-    var index = utils.indexof(this.comments, { id: commentId });
-    if (~index) this.comments.splice(index, 1);
-    else return cb('not found');
-    this.save(cb);
-  },
+    removeComment: function (commentId, cb) {
+        var index = utils.indexof(this.comments, { id: commentId });
+        if (~index) this.comments.splice(index, 1);
+        else return cb('not found');
+        this.save(cb);
+    },
 
 
 
@@ -249,85 +249,85 @@ ArticleSchema.methods = {
 
 
 
- addRating: function (user, comment, cb) {
-   // var notify = require('../mailer');
+    addRating: function (user, comment, cb) {
+        // var notify = require('../mailer');
 
-    this.ratings.push({
-      rating: ratings.rating,
-      user: user._id
-    })
-    this.save(cb);
-  },
+        this.ratings.push({
+            rating: ratings.rating,
+            user: user._id
+        })
+        this.save(cb);
+    },
 
-  /**
-   * Remove like
-   *
-   * @param {commentId} String
-   * @param {Function} cb
-   * @api private
-   */
+    /**
+     * Remove like
+     *
+     * @param {commentId} String
+     * @param {Function} cb
+     * @api private
+     */
 
-  removeRating: function (commentId, cb) {
-    var index = utils.indexof(this.likes, { id: commentId });
-    if (~index) this.likes.splice(index, 1);
-    else return cb('not found');
-    this.save(cb);
-  },
-
-
-
-
- addLike: function (user, comment, cb) {
-   // var notify = require('../mailer');
-
-    this.likes.push({
-      user: user._id
-    })
-    this.save(cb);
-  },
-
-  /**
-   * Remove like
-   *
-   * @param {commentId} String
-   * @param {Function} cb
-   * @api private
-   */
-
-  removeLike: function (commentId, cb) {
-    var index = utils.indexof(this.likes, { id: commentId });
-    if (~index) this.likes.splice(index, 1);
-    else return cb('not found');
-    this.save(cb);
-  },
+    removeRating: function (commentId, cb) {
+        var index = utils.indexof(this.likes, { id: commentId });
+        if (~index) this.likes.splice(index, 1);
+        else return cb('not found');
+        this.save(cb);
+    },
 
 
 
 
- addCategory: function (user, comment, cb) {
-   // var notify = require('../mailer');
+    addLike: function (user, comment, cb) {
+        // var notify = require('../mailer');
 
-    this.categories.push({
-      category: comment.category,
-      user: user._id
-    })
-    this.save(cb);
-  },
+        this.likes.push({
+            user: user._id
+        })
+        this.save(cb);
+    },
 
-  /**
-   * Remove like
-   *
-   * @param {commentId} String
-   * @param {Function} cb
-   * @api private
-   */
+    /**
+     * Remove like
+     *
+     * @param {commentId} String
+     * @param {Function} cb
+     * @api private
+     */
 
-  removeCategory: function (commentId, cb) {
-    var index = utils.indexof(this.categories, { id: commentId });
-    if (~index) this.categories.splice(index, 1);
-    else return cb('not found');
-    this.save(cb);
-  }
+    removeLike: function (commentId, cb) {
+        var index = utils.indexof(this.likes, { id: commentId });
+        if (~index) this.likes.splice(index, 1);
+        else return cb('not found');
+        this.save(cb);
+    },
+
+
+
+
+    addCategory: function (user, comment, cb) {
+        // var notify = require('../mailer');
+
+        this.categories.push({
+            category: comment.category,
+            user: user._id
+        })
+        this.save(cb);
+    },
+
+    /**
+     * Remove like
+     *
+     * @param {commentId} String
+     * @param {Function} cb
+     * @api private
+     */
+
+    removeCategory: function (commentId, cb) {
+        var index = utils.indexof(this.categories, { id: commentId });
+        if (~index) this.categories.splice(index, 1);
+        else return cb('not found');
+        this.save(cb);
+    }
 
 
 }
@@ -341,66 +341,67 @@ ArticleSchema.methods = {
 
 ArticleSchema.statics = {
 
-  /**
-   * Find article by id
-   *
-   * @param {ObjectId} id
-   * @param {Function} cb
-   * @api private
-   */
+    /**
+     * Find article by id
+     *
+     * @param {ObjectId} id
+     * @param {Function} cb
+     * @api private
+     */
 
-  load: function (id, cb) {
-    this.findOne({ _id : id })
-      .populate('user', 'name email username')
-      .populate('comments.user')
-      .exec(cb);
-  },
+    load: function (id, cb) {
+        this.findOne({ _id : id })
+            .populate('user', 'name email username')
+            .populate('comments.user')
+            .exec(cb);
+    },
 
-  /**
-   * List articles
-   *
-   * @param {Object} options
-   * @param {Function} cb
-   * @api private
-   */
+    /**
+     * List articles
+     *
+     * @param {Object} options
+     * @param {Function} cb
+     * @api private
+     */
 
-  list: function (options, cb) {
+    list: function (options, cb) {
 
-    //area1 = { center: [-74.0059, 40.7127], radius: 5000000000, unique: true }
-    var criteria = options.criteria || {}
-   // this.find({location:{$near:[-74.0059, 40.7127], $maxDistance:500000000}})
-   if(criteria['lon']){
-    console.log(criteria['lon']);
-     this.find()
-    .or(criteria['query'])
-    .where('location').near({
-        center: {'coordinates':[criteria['lon'], criteria['lat']], 'type':"Point"},
-        maxDistance: criteria['distance'],
-         spherical: true
-      })
-  
-      .populate('user', 'name username')
-      .sort({'createdAt': -1}) // sort by date
-      .limit(options.perPage)
-      .skip(options.perPage * options.page)
-      .exec(cb);
-   }
+        //area1 = { center: [-74.0059, 40.7127], radius: 5000000000, unique: true }
+        var criteria = options.criteria || {}
+        var filters = options.filters;
+        // this.find({location:{$near:[-74.0059, 40.7127], $maxDistance:500000000}})
+        if(criteria['lon']){
+            console.log(criteria['lon']);
+            this.find(filters)
+                .or(criteria['query'])
+                .where('location').near({
+                    center: {'coordinates':[criteria['lon'], criteria['lat']], 'type':"Point"},
+                    maxDistance: criteria['distance'],
+                    spherical: true
+                })
 
-   else{
-    console.log('not geospatial')
+                .populate('user', 'name username')
+                .sort({'createdAt': -1}) // sort by date
+                .limit(options.perPage)
+                .skip(options.perPage * options.page)
+                .exec(cb);
+        }
 
-     this.find()
-      .or(criteria)
-      .populate('user', 'name username')
-      .sort({'createdAt': -1}) // sort by date
-      .limit(options.perPage)
-      .skip(options.perPage * options.page)
-      .exec(cb);
+        else{
+            console.log('not geospatial')
+
+            this.find(filters)
+                .or(criteria)
+                .populate('user', 'name username')
+                .sort({'createdAt': -1}) // sort by date
+                .limit(options.perPage)
+                .skip(options.perPage * options.page)
+                .exec(cb);
 
 
-   }
-   
-  }
+        }
+
+    }
 }
 
 mongoose.model('Article', ArticleSchema);
