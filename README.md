@@ -25,7 +25,48 @@ You should be able to see the code at localhost:8080
 From here, you can make the changes you would like. To see server side changes, press Ctrl-C to stop the server. Then node server.js to run it again.
 
 Once you have your changes, create an Openshift.com account. 
-Create a node catridge. Then pull that node catrdige down. Then overwite the files with the files from this repo. From there, push it back up. Your app should now be running in the cloud.
+
+
+
+Deployment on OpenShift:
+
+
+Login to Openshift and create a "new application"
+
+Select the Node.js cartridge
+
+Give it a name and a subdomain. Leave git rpositiory feild blank. All other fields are not important.
+
+Wait 1-2 minutes for it to spin up your app.
+
+Then, on the app page in OpenShift, you should see option to add Mongo-DB.... this is critical.
+ Add it. You can also add it using the command line tool later if you would like. But you need it installed to run the exampleApp.
+
+Install RHC from your console: gem install rhc
+
+In new console window, run: rhc setup --clean
+
+Press enter on first prompt
+
+Type your username and password from OpenShift on the next prompts
+
+Type yes to all other prompts
+
+You should now be able to refresh openshift in your broswer, and on the individual app page, see your ssh address, hich you will add a remote repository in your console
+
+In a folder such as Desktop/apps, run rhc git-clone <yourAppName>
+
+It will create a directory there. Copy all your files from your exampleApp, minus the .git file/folder and paste it into the new cloned directory
+
+In that directory in your console, run: git add -A
+
+then, run: git commit -m "initial commit for opneshift"
+
+now run: git push
+
+After a few minutes, once all the node modules and your code is deployed remotely, you should be able to go to the app's url and see the code running.
+
+ Your app should now be running in the cloud.
 
 
 
