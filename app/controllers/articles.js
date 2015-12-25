@@ -43,8 +43,6 @@ exports.index = function (req, res){
 
   async.waterfall([
     function(callback) {
-      var geocodeQuery = {}
-
       if (req.query.country && req.query.city){
         codify(req.query.city+", "+req.query.country, function(err, res){
           if(!err){
@@ -162,7 +160,7 @@ exports.index = function (req, res){
     }
   ], function (err) {
     if(err){
-      //handle final error
+      res.status(500).send(err);
     }
     else{
       if(req.query.format=="json"){
