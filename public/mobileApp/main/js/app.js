@@ -5,7 +5,7 @@ if (window.location.href.indexOf('localhost') == -1) {
 //global defaults to looking url as new, is replaced by an ide if a user selects a certain item
 currentItemLookingId = "new";
 //currentItemLookingId might be ='cshdhsi72jdgdd6sjs7sjs' or the _id of an item
-angular.module('ionicApp', ['ionic', 'ion-google-place', 'angularMoment', 'ion-gallery'])
+angular.module('ionicApp', ['ionic', 'ion-google-place', 'angularMoment', 'ion-gallery', 'ya.nouislider'])
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -361,6 +361,14 @@ angular.module('ionicApp', ['ionic', 'ion-google-place', 'angularMoment', 'ion-g
         views: {
           'menuContent': {
             templateUrl: "map.html"
+          }
+        }
+      })
+      .state('menu.filter', {
+        url: "/filter",
+        views: {
+          'menuContent': {
+            templateUrl: "filter.html"
           }
         }
       })
@@ -1218,29 +1226,98 @@ angular.module('ionicApp', ['ionic', 'ion-google-place', 'angularMoment', 'ion-g
   })
   //
   .controller('MapCtrl', function($scope, $http, $ionicLoading, $ionicHistory) {
-    google.maps.event.addDomListener(window, 'load', function() {
-      var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
-      var mapOptions = {
-        center: myLatlng,
-        zoom: 16,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      navigator.geolocation.getCurrentPosition(function(pos) {
-        map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-        var myLocation = new google.maps.Marker({
-          position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-          map: map,
-          title: "My Location"
-        });
+    var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+    var mapOptions = {
+      center: myLatlng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      var myLocation = new google.maps.Marker({
+        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+        map: map,
+        title: "My Location"
       });
-      $scope.map = map;
     });
+    $scope.map = map;
     $scope.back = function () {
       $ionicHistory.goBack();
     };
     $scope.refresh = function () {
       $state.reload();
     };
+  })
+  //
+  .controller('FilterCtrl', function($scope, $http, $ionicLoading, $ionicHistory) {
+    $scope.filter = {
+      enabled: {
+        byDistance: false,
+        byCity:false,
+        byCountry:false
+      },
+      distance: [],
+      country: [],
+      city: [],
+      priceRange : { // options for https://github.com/Yankovsky/nouislider-angular
+        start: [20, 70],
+        margin: 30,
+        step: 10,
+        //connect: true,
+        range: {min: 0, max: 100},
+        tooltips: true
+      }
+    };
+    $scope.contents = [{
+      "_id" : "567a35b3fab023a614b6cfbf",
+      "user" : "56781048869309345c1dd592",
+      "accessSecret" : "",
+      "availabilitySlots" : [],
+      "availableNow" : false,
+      "startDate" : "2015-12-23T05:48:35.345Z",
+      "email" : "",
+      "numRatings" : 0,
+      "rating" : 0,
+      "price" : 125,
+      "updatedAt" : "2015-12-23T05:48:35.345Z",
+      "type" : "Point",
+      "location" : [
+        82.9357327000000026,
+        55.0083525999999878
+      ],
+      "media" : [],
+      "createdAt" : "2015-12-23T05:48:35.345Z",
+      "image" : {
+        "cdnUri" : "/uploads/7828345c6a36bccbc4692b56bdb78734.png",
+        "files" : [
+          {
+            "buffer" : null,
+            "truncated" : false,
+            "size" : 19580,
+            "extension" : "png",
+            "path" : "/tmp/7828345c6a36bccbc4692b56bdb78734.png",
+            "mimetype" : "image/png",
+            "encoding" : "7bit",
+            "name" : "7828345c6a36bccbc4692b56bdb78734.png",
+            "originalname" : "8.png",
+            "fieldname" : "image"
+          }
+        ]
+      },
+      "tags" : [
+        "test",
+        "again test",
+        "sport",
+        "games"
+      ],
+      "categories" : [],
+      "likes" : [],
+      "ratings" : [],
+      "comments" : [],
+      "body" : "\"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\"",
+      "title" : "My first test article",
+      "__v" : 0
+    }];
   })
 
