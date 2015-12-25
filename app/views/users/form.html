@@ -10,13 +10,12 @@
     
  
     {% set action = '/users/' + user._id+'' %}
-  
-<div id="content-block">
+  <div id="content-block">
     <div class="container be-detail-container">
       <div class="row">
         <div class="col-xs-12 col-md-3 left-feild">
           <div class="be-vidget back-block">
-            <a class="btn full color-1 size-1 hover-1" href="{{action}}"><i class="fa fa-chevron-left"></i>back to profile</a>
+            <a class="btn full color-1 size-1 hover-1" href="author.html"><i class="fa fa-chevron-left"></i>back to profile</a>
           </div>
           <div class="be-vidget hidden-xs hidden-sm" id="scrollspy">
             <h3 class="letf-menu-article">
@@ -28,10 +27,10 @@
                 <li class="edit-ln"><a href="#edit-password">Edit Password</a></li>
                 <li class="edit-ln"><a href="#on-the-web">On The Web</a></li>
                 <li class="edit-ln"><a href="#about-me">About Me</a></li>
-                
+                <li class="edit-ln"><a href="#web-references">Web References</a></li>
               </ul>
             </div>
-
+            <a class="btn full color-1 size-1 hover-1 add_section"><i class="fa fa-plus"></i>add sections</a> 
           </div>
 
         </div>
@@ -41,25 +40,31 @@
               <div class="info-block style-2">
                 <div class="be-large-post-align "><h3 class="info-block-label">Basic Information</h3></div>
               </div>
-            
+              <div class="be-large-post-align">
+                <div class="be-change-ava">
+                  <a class="be-ava-user style-2" href="blog-detail-2.html">
+                    <img src="/templates/settings/img/ava_10.jpg" alt=""> 
+                  </a>
+                  <a class="btn color-4 size-2 hover-7">replace image</a>
+                </div>
+              </div>
 
-             
- <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
+              <form action="{{action}}" method="post" enctype="multipart/form-data" id="replaceForm">
+
                  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
 
                             <div class="be-large-post-align">
                 <div class="row">
                   <div class="input-col col-xs-12 col-sm-6">
                     <div class="form-group fg_icon focus-2">
-                      <div class="form-label">Name</div>
+                      <div class="form-label">First Name</div>
                       <input class="form-input" type="text" name="name" value="{[{user.name}]}">
-
                     </div>              
                   </div>
                   <div class="input-col col-xs-12 col-sm-6">
                     <div class="form-group focus-2">
-                      <div class="form-label">Username</div>                 
-                      <input class="form-input" name="username" type="text" value="{[{user.username}]}">
+                      <div class="form-label">Last Name</div>                 
+                      <input class="form-input" type="text" name ="lastName"value="{[{user.lastName}]}">
                     </div>                
                   </div>
                   <div class="input-col col-xs-12">
@@ -71,102 +76,90 @@
                   <div class="input-col col-xs-12">
                     <div class="form-group focus-2">
                       <div class="form-label">Company</div>                 
-                      <input class="form-input" name="company" type="text" placeholder="{[{user.company}]}">
+                      <input class="form-input" type="text" name="company" placeholder="{[{user.company}]}">
                     </div>                
                   </div>
-                 
-                  <div ng-controller="test" ng-model="user" class="input-col col-xs-12 col-sm-6">
-            <!--        <div class="form-label">Country</div>
-                    <div class="be-drop-down icon-none">
-                      <span class="be-dropdown-content"> United Kingdom </span>
-                      <ul class="drop-down-list">
-                        <li><a>USA</a></li>
-                        <li><a>India</a></li>
-                        <li><a>Mexica</a></li>
-                        <li><a>Russia</a></li>
-                        <li><a>Italy</a></li>
-                      </ul>
-                    </div> -->
-<div class="form-group focus-2">
-                            <div class="form-label">Country</div> 
-                            <select  class="form-control" ng-model="form.type" ng-change="change()" required ng-options='option.value as option.name for option in typeOptions'>
+                  <div  ng-controller="test" ng-model="user" class="input-col col-xs-12 col-sm-6">
+                    <div class="form-label">Country</div>
+                    
+                     
+                  
+                        <select  class="form-control" ng-model="form.type" ng-change="change()" required ng-options='option.value as option.name for option in typeOptions'>
                                
                             </select>
-                        </div>
-                           <div ng-show="false" class="form-group fg_icon focus-2">
+                    
+                
+                     <div ng-show="false" class="form-group fg_icon focus-2">
                       <div class="form-label">Name</div>
                       <input class="form-input" id="countryID" type="text" name="country" value="{[{user.country}]}">
                     </div>    
-
-                   
-
-
                   </div>
-<div id="country" name="country"><br/></div>
-
-
-
-                
-                  <div class="input-col col-xs-12  col-sm-6">
+                  <div id="country" name="country"><br/></div>
+                  <div class="input-col col-xs-12 col-sm-6">
                     <div class="form-group focus-2">
                       <div class="form-label">City</div>                  
-                      <input class="form-input" name="city" type="text" value="{[{user.city}]}">
+                      <input class="form-input" type="text" name="city" value="{[{user.city}]}">
                     </div>                
                   </div>
                   <div class="input-col col-xs-12">
                     <div class="form-group focus-2">
                       <div class="form-label">Website</div>                  
-                      <input class="form-input" name="website" type="text" value="{[{user.website}]}">
+                      <input class="form-input" type="text" name="website" value="{[{user.website}]}">
                     </div>                
                   </div>                
                 </div>
               </div>
-              <div ng-controller="test">
               <input type="submit" value="save" class="btn color-1 size-2 hover-1 btn-right">
-            </div>
             </form>
 
 
             <script>
-    
+        
 
             </script>
 
             </div>
           </div>
-          <div class="sec" ng-model="user" ng-controller="passwordChanging"  data-sec="edit-password">
-            <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
+          <div class="sec" ng-model="user" ng-controller="passwordChanging"   data-sec="edit-password">
+             <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
             <div class="be-large-post">
               <div class="info-block style-2">
                 <div class="be-large-post-align"><h3 class="info-block-label">Password</h3></div>
-                <input ng-show="false" class="form-input" type="text" name="passwordd" value="{[{user.password}]}">
               </div>
               <div class="be-large-post-align">
                 <div class="row">
-            
                   <div class="input-col col-xs-12 col-sm-4">
-                    <div class="form-group focus-2">
+                    <div ng-show="false" class="form-group focus-2">
+                      <div class="form-label">Old Password</div>                  
+                      <input class="form-input" ng-model="oldpass" type="password" placeholder="">
+                    </div> 
+                     <div class="form-group focus-2">
                       <div class="form-label">New Password</div>                  
-                      <input class="form-input" type="password" ng-model="newpass1" placeholder="">
+                      <input class="form-input" ng-model="newpass1" type="password" placeholder="">
+                    </div>                   
+                  </div>
+                  <div class="input-col col-xs-12 col-sm-4">
+                    <div ng-show="false" class="form-group focus-2">
+                      <div class="form-label">New Password</div>                  
+                      <input class="form-input" type="password" placeholder="">
                     </div>                
                   </div>
                   <div class="input-col col-xs-12 col-sm-4">
                     <div class="form-group focus-2">
                       <div class="form-label">Repeat Password</div>                 
-                      <input class="form-input" type="password" ng-model="newpass2" name="password" placeholder="">
+                      <input class="form-input" ng-model="newpass2" name="password" type="password" placeholder="">
                     </div>                
                   </div>
                   <div class="col-xs-12">
-                      <input ng-disabled="disable()" type="submit" value="Change Password" class="btn color-1 size-2 hover-1 btn-right">
+                    <input ng-disabled="disable()" value="change Password" class="btn color-1 size-2 hover-1 btn-right"></input>
                   </div>                                
                 </div>
               </div>
             </div>
-
           </form>
           </div>
           <div class="sec" data-sec="on-the-web">
-            <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
+              <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
             <div class="be-large-post m-social">
               <div class="info-block style-2">
                 <div class="be-large-post-align"><h3 class="info-block-label">On The Web</h3></div>
@@ -178,7 +171,7 @@
                     <a class="social-btn color-1" href="blog-detail-2.html"><i class="fa fa-facebook"></i></a>
                   </div>
                   <div class="s_input">
-                    <input name="facebook" class="form-input" type="text" value="{[{user.facebook}]}">
+                    <input class="form-input" name="facebook" type="text" value="{[{user.facebook}]}">
                   </div>
                 </div>
                 <div class="social-input form-group focus-2">
@@ -187,7 +180,7 @@
                     <a class="social-btn color-2" href="blog-detail-2.html"><i class="fa fa-twitter"></i></a>
                   </div>
                   <div class="s_input">
-                    <input class="form-input" name="twitter" type="text"  value="{[{user.twitter}]}">
+                    <input class="form-input" name="twitter" type="text" value="{[{user.twitter}]}">
                   </div>
                 </div>
                 <div class="social-input form-group focus-2">
@@ -205,7 +198,7 @@
                     <a class="social-btn color-4" href="blog-detail-2.html"><i class="fa fa-pinterest-p"></i></a>
                   </div>
                   <div class="s_input">
-                    <input name="pinterest" class="form-input" type="text" value="{[{user.pinterest}]}" >
+                    <input class="form-input" type="text" name="pinterest"  value="{[{user.pinterest}]}">
                   </div>
                 </div>
                 <div class="social-input form-group focus-2">
@@ -214,11 +207,11 @@
                     <a class="social-btn color-5" href="blog-detail-2.html"><i class="fa fa-instagram"></i></a>
                   </div>
                   <div class="s_input">
-                    <input name="instagram" class="form-input" type="text" value="{[{user.instagram}]}">
+                    <input class="form-input" type="text" name="instagram" value="{[{user.instagram}]}">
                   </div>
                 </div>                                                          
               </div>
-                 <div class="col-xs-12">
+              <div class="col-xs-12">
                       <input  type="submit" value="Save" class="btn color-1 size-2 hover-1 btn-right">
                   </div>  
             </div>
@@ -236,31 +229,55 @@
                   <div class="input-col col-xs-12">
                     <div class="form-group focus-2">
                       <div class="form-label">Section Title</div>                 
-                      <input class="form-input" name="sectionTitle" value="{[{user.sectionTitle}]}" type="text" placeholder="About Me">
+                      <input class="form-input" value="{[{user.sectionTitle}]}" name="sectionTitle" type="text" placeholder="About Me">
                     </div>                
                   </div>
                   <div class="input-col col-xs-12">
                     <div class="form-group focus-2">
                       <div class="form-label">Description</div>
-                      <input class="form-input" type="text" name="description" value="{[{user.description}]}" required="" placeholder="Something about you"></input>
+                      <input class="form-input" value="{[{user.description}]}" name="description" required="" placeholder="Something about you"></input>
                     </div>
                   </div>
                 </div>
-    
-              </div> 
+              </div>  
               <div class="col-xs-12">
                       <input  type="submit" value="Save" class="btn color-1 size-2 hover-1 btn-right">
                   </div>             
             </div>
-
           </form>
           </div>
 
-
-            </div>
+          <div class=" sec" data-sec="web-references">
+                <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
+            <div class="be-large-post">
+              <div class="info-block style-2">
+                <div class="be-large-post-align"><h3 class="info-block-label">Web References</h3></div>
+              </div>
+              <div class="be-large-post-align">
+                <div class="row">
+                  <div class="input-col col-xs-12 col-sm-5">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Link Title</div>                  
+                      <input class="form-input" name="linkTitle" type="text" placeholder="Enter title">
+                    </div>                
+                  </div>
+                  <div class="input-col col-xs-12 col-sm-5">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Link descriprion</div>                  
+                      <input class="form-input" name="linkDescription" type="text" placeholder="Enter descriprion">
+                    </div>                
+                  </div>
+                  <div class="col-xs-12 col-sm-2">                
+                 
+                       <input  type="submit" value="Add" class="btn full btn-input color-1 size-4 hover-1">
+                  </div>   
+                  </div>
+                </div>              
+              </div>
+              
           </form>
           </div>
-                                           
+          <a class="btn full color-1 size-1 hover-1 add_section"><i class="fa fa-plus"></i>add sections</a>                                       
         </div>        
       </div>
     </div>

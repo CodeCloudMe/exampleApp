@@ -33,6 +33,7 @@ var UserSchema = new Schema({
   company: { type: String, default: '' },
   username: { type: String, default: '' },
   sectionTitle : { type: String, default: '' },
+  lastName : { type: String, default: '' },
   description: { type: String, default: '' },
   provider: { type: String, default: '' },
   hashed_password: { type: String, default: '' },
@@ -46,6 +47,10 @@ var UserSchema = new Schema({
   google: {},
   linkedin: {},
   pinterest:{},
+  instagram:{},
+  linkTitle:{ type : Array , "default" : [] },
+  linkDescription:{ type : Array , "default" : [] },
+  links : { type : Array , "default" : [] },
 
 
   comments: [{
@@ -53,6 +58,7 @@ var UserSchema = new Schema({
     user: { type : Schema.ObjectId, ref : 'User' },
     createdAt: { type : Date, default : Date.now }
   }],
+
   ratings: [{
     rating: { type : Number, default : 3 },
     user: { type : Schema.ObjectId, ref : 'User' },

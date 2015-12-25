@@ -36,13 +36,21 @@ console.log(document.getElementsByName("country")[0].value);
 
 .controller('passwordChanging', function($scope, $http) {
 	console.log('password changing');
-
-
+//console.log('testmd5'+md5.createHash($scope.user.hashed_password));
+//console.log(CryptoJS.SHA1($scope.oldpass));
   $scope.test = function(){
 	
   }
  $scope.disable= function(){
+ 	//
+//console.log(CryptoJS.SHA1($scope.oldpass,$scope.user.salt,40).toString(CryptoJS.enc.Hex));
+//console.log($scope.user.hashed_password);
+//console.log($scope.user.hashed_password.toString(CryptoJS.enc.Hex));
+//console.log($scope.user.hashed_password.toString(CryptoJS.enc.Base64));
+//console.log(CryptoJS.SHA1($scope.oldpass,$scope.user.salt).toString(CryptoJS.enc.Hex));
+//console.log(CryptoJS.SHA1.decrypt($scope.user.hashed_password,$scope.user.salt));
 
+//console.log((CryptoJS.SHA1($scope.oldpass)) === $scope.user.hashed_password);
 	if(($scope.newpass1 == $scope.newpass2) && ($scope.newpass1))
 	return false;
   return true;
