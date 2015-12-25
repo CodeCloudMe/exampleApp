@@ -9,60 +9,456 @@
  
     
  
-    {% set action = '/users/' + user._id %}
+    {% set action = '/users/' + user._id+'' %}
+  <div id="content-block">
+    <div class="container be-detail-container">
+      <div class="row">
+        <div class="col-xs-12 col-md-3 left-feild">
+          <div class="be-vidget back-block">
+            <a class="btn full color-1 size-1 hover-1" href="author.html"><i class="fa fa-chevron-left"></i>back to profile</a>
+          </div>
+          <div class="be-vidget hidden-xs hidden-sm" id="scrollspy">
+            <h3 class="letf-menu-article">
+              Choose Category
+            </h3>
+            <div class="creative_filds_block">
+              <ul class="ul nav">
+                <li class="edit-ln"><a href="#basic-information">Basic Information</a></li>
+                <li class="edit-ln"><a href="#edit-password">Edit Password</a></li>
+                <li class="edit-ln"><a href="#on-the-web">On The Web</a></li>
+                <li class="edit-ln"><a href="#about-me">About Me</a></li>
+                <li class="edit-ln"><a href="#web-references">Web References</a></li>
+              </ul>
+            </div>
+            <a class="btn full color-1 size-1 hover-1 add_section"><i class="fa fa-plus"></i>add sections</a> 
+          </div>
+
+        </div>
+        <div class="col-xs-12 col-md-9 _editor-content_">
+          <div class="sec"  data-sec="basic-information">
+            <div class="be-large-post">
+              <div class="info-block style-2">
+                <div class="be-large-post-align "><h3 class="info-block-label">Basic Information</h3></div>
+              </div>
+              <div class="be-large-post-align">
+                <div class="be-change-ava">
+                  <a class="be-ava-user style-2" href="blog-detail-2.html">
+                    <img src="/templates/settings/img/ava_10.jpg" alt=""> 
+                  </a>
+                  <a class="btn color-4 size-2 hover-7">replace image</a>
+                </div>
+              </div>
+
+              <form action="{{action}}" method="post" enctype="multipart/form-data" id="replaceForm">
+
+                 <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+
+                            <div class="be-large-post-align">
+                <div class="row">
+                  <div class="input-col col-xs-12 col-sm-6">
+                    <div class="form-group fg_icon focus-2">
+                      <div class="form-label">First Name</div>
+                      <input class="form-input" type="text" name="name" value="{[{user.name}]}">
+                    </div>              
+                  </div>
+                  <div class="input-col col-xs-12 col-sm-6">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Last Name</div>                 
+                      <input class="form-input" type="text" name ="lastName"value="{[{user.lastName}]}">
+                    </div>                
+                  </div>
+                  <div class="input-col col-xs-12">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Occupation</div>                  
+                      <input class="form-input" name="occupation" type="text" value="{[{user.occupation}]}">
+                    </div>                
+                  </div>
+                  <div class="input-col col-xs-12">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Company</div>                 
+                      <input class="form-input" type="text" name="company" placeholder="{[{user.company}]}">
+                    </div>                
+                  </div>
+                  <div  ng-controller="test" ng-model="user" class="input-col col-xs-12 col-sm-6">
+                    <div class="form-label">Country</div>
+                    
+                     
+                  
+                        <select  class="form-control" ng-model="form.type" ng-change="change()" required ng-options='option.value as option.name for option in typeOptions'>
+                               
+                            </select>
+                    
+                
+                     <div ng-show="false" class="form-group fg_icon focus-2">
+                      <div class="form-label">Name</div>
+                      <input class="form-input" id="countryID" type="text" name="country" value="{[{user.country}]}">
+                    </div>    
+                  </div>
+                  <div id="country" name="country"><br/></div>
+                  <div class="input-col col-xs-12 col-sm-6">
+                    <div class="form-group focus-2">
+                      <div class="form-label">City</div>                  
+                      <input class="form-input" type="text" name="city" value="{[{user.city}]}">
+                    </div>                
+                  </div>
+                  <div class="input-col col-xs-12">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Website</div>                  
+                      <input class="form-input" type="text" name="website" value="{[{user.website}]}">
+                    </div>                
+                  </div>                
+                </div>
+              </div>
+              <input type="submit" value="save" class="btn color-1 size-2 hover-1 btn-right">
+            </form>
+
+
+            <script>
+        
+
+            </script>
+
+            </div>
+          </div>
+          <div class="sec" ng-model="user" ng-controller="passwordChanging"   data-sec="edit-password">
+             <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
+            <div class="be-large-post">
+              <div class="info-block style-2">
+                <div class="be-large-post-align"><h3 class="info-block-label">Password</h3></div>
+              </div>
+              <div class="be-large-post-align">
+                <div class="row">
+                  <div class="input-col col-xs-12 col-sm-4">
+                    <div ng-show="false" class="form-group focus-2">
+                      <div class="form-label">Old Password</div>                  
+                      <input class="form-input" ng-model="oldpass" type="password" placeholder="">
+                    </div> 
+                     <div class="form-group focus-2">
+                      <div class="form-label">New Password</div>                  
+                      <input class="form-input" ng-model="newpass1" type="password" placeholder="">
+                    </div>                   
+                  </div>
+                  <div class="input-col col-xs-12 col-sm-4">
+                    <div ng-show="false" class="form-group focus-2">
+                      <div class="form-label">New Password</div>                  
+                      <input class="form-input" type="password" placeholder="">
+                    </div>                
+                  </div>
+                  <div class="input-col col-xs-12 col-sm-4">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Repeat Password</div>                 
+                      <input class="form-input" ng-model="newpass2" name="password" type="password" placeholder="">
+                    </div>                
+                  </div>
+                  <div class="col-xs-12">
+                    <input ng-disabled="disable()" value="change Password" class="btn color-1 size-2 hover-1 btn-right"></input>
+                  </div>                                
+                </div>
+              </div>
+            </div>
+          </form>
+          </div>
+          <div class="sec" data-sec="on-the-web">
+              <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
+            <div class="be-large-post m-social">
+              <div class="info-block style-2">
+                <div class="be-large-post-align"><h3 class="info-block-label">On The Web</h3></div>
+              </div>
+              <div class="be-large-post-align">
+                <div class="social-input form-group focus-2">
+                  <div class="s_icon">
+                    <div class="social-bars"><i class="fa fa-bars"></i></div>
+                    <a class="social-btn color-1" href="blog-detail-2.html"><i class="fa fa-facebook"></i></a>
+                  </div>
+                  <div class="s_input">
+                    <input class="form-input" name="facebook" type="text" value="{[{user.facebook}]}">
+                  </div>
+                </div>
+                <div class="social-input form-group focus-2">
+                  <div class="s_icon">
+                    <div class="social-bars"><i class="fa fa-bars"></i></div>
+                    <a class="social-btn color-2" href="blog-detail-2.html"><i class="fa fa-twitter"></i></a>
+                  </div>
+                  <div class="s_input">
+                    <input class="form-input" name="twitter" type="text" value="{[{user.twitter}]}">
+                  </div>
+                </div>
+                <div class="social-input form-group focus-2">
+                  <div class="s_icon">
+                    <div class="social-bars"><i class="fa fa-bars"></i></div>
+                    <a class="social-btn color-3" href="blog-detail-2.html"><i class="fa fa-google-plus"></i></a>
+                  </div>
+                  <div class="s_input">
+                    <input class="form-input" name="google" type="text" value="{[{user.google}]}">
+                  </div>
+                </div>
+                <div class="social-input form-group focus-2">
+                  <div class="s_icon">
+                    <div class="social-bars"><i class="fa fa-bars"></i></div>
+                    <a class="social-btn color-4" href="blog-detail-2.html"><i class="fa fa-pinterest-p"></i></a>
+                  </div>
+                  <div class="s_input">
+                    <input class="form-input" type="text" name="pinterest"  value="{[{user.pinterest}]}">
+                  </div>
+                </div>
+                <div class="social-input form-group focus-2">
+                  <div class="s_icon">
+                    <div class="social-bars"><i class="fa fa-bars"></i></div>
+                    <a class="social-btn color-5" href="blog-detail-2.html"><i class="fa fa-instagram"></i></a>
+                  </div>
+                  <div class="s_input">
+                    <input class="form-input" type="text" name="instagram" value="{[{user.instagram}]}">
+                  </div>
+                </div>                                                          
+              </div>
+              <div class="col-xs-12">
+                      <input  type="submit" value="Save" class="btn color-1 size-2 hover-1 btn-right">
+                  </div>  
+            </div>
+          </form>
+          </div>
+
+          <div class="sec"  data-sec="about-me" >
+            <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
+            <div class="be-large-post">
+              <div class="info-block style-2">
+                <div class="be-large-post-align"><h3 class="info-block-label">About Me</h3></div>
+              </div>
+              <div class="be-large-post-align">
+                <div class="row">
+                  <div class="input-col col-xs-12">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Section Title</div>                 
+                      <input class="form-input" value="{[{user.sectionTitle}]}" name="sectionTitle" type="text" placeholder="About Me">
+                    </div>                
+                  </div>
+                  <div class="input-col col-xs-12">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Description</div>
+                      <input class="form-input" value="{[{user.description}]}" name="description" required="" placeholder="Something about you"></input>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+              <div class="col-xs-12">
+                      <input  type="submit" value="Save" class="btn color-1 size-2 hover-1 btn-right">
+                  </div>             
+            </div>
+          </form>
+          </div>
+
+          <div class=" sec" data-sec="web-references">
+                <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
+            <div class="be-large-post">
+              <div class="info-block style-2">
+                <div class="be-large-post-align"><h3 class="info-block-label">Web References</h3></div>
+              </div>
+              <div class="be-large-post-align">
+                <div class="row">
+                  <div class="input-col col-xs-12 col-sm-5">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Link Title</div>                  
+                      <input class="form-input" name="linkTitle" type="text" placeholder="Enter title">
+                    </div>                
+                  </div>
+                  <div class="input-col col-xs-12 col-sm-5">
+                    <div class="form-group focus-2">
+                      <div class="form-label">Link descriprion</div>                  
+                      <input class="form-input" name="linkDescription" type="text" placeholder="Enter descriprion">
+                    </div>                
+                  </div>
+                  <div class="col-xs-12 col-sm-2">                
+                 
+                       <input  type="submit" value="Add" class="btn full btn-input color-1 size-4 hover-1">
+                  </div>   
+                  </div>
+                </div>              
+              </div>
+              
+          </form>
+          </div>
+          <a class="btn full color-1 size-1 hover-1 add_section"><i class="fa fa-plus"></i>add sections</a>                                       
+        </div>        
+      </div>
+    </div>
+  </div>
+
   
 
-  <div class="row">
-    <div class="col-md-8">
-      <form method="post" action="{{ action }}" enctype="multipart/form-data" role="form" class="form-horizontal">
-
-        <input type="hidden" name="_csrf" value="{{ csrf_token }}">
-
-      
-          <input type="hidden" name="_method" value="PUT">
-      
-
-        <div class="form-group">
-          <label for="title" class="col-sm-2 control-label">Username</label>
-          <div class="col-sm-10">
-            <input type="text" name="username" value="{{ user.username }}" placeholder="Enter the title" class="form-control" id="title">
+  <div class="be-fixed-filter"></div>
+  
+  <div class="large-popup login">
+    <div class="large-popup-fixed"></div>
+    <div class="container large-popup-container">
+      <div class="row">
+        <div class="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3  large-popup-content">
+          <div class="row">
+            <div class="col-md-12">
+              <i class="fa fa-times close-button"></i>
+              <h5 class="large-popup-title">Log in</h5>
+            </div>
+            <form action="./" class="popup-input-search">
+            <div class="col-md-6">
+              <input class="input-signtype" type="email" required="" placeholder="Your email">
+            </div>
+            <div class="col-md-6">
+              <input class="input-signtype" type="password" required="" placeholder="Password">
+            </div>
+            <div class="col-xs-6">
+              <div class="be-checkbox">
+              <label class="check-box">
+                    <input class="checkbox-input" type="checkbox" /> <span class="check-box-sign"></span>
+                </label>
+                <span class="large-popup-text">
+                  Stay signed in
+                </span>
+              </div>
+              
+              <a href="blog-detail-2.html" class="link-large-popup">Forgot password?</a>
+            </div>
+            <div class="col-xs-6 for-signin">
+              <input type="submit" class="be-popup-sign-button" value="SIGN IN">
+            </div>
+            </form>
           </div>
         </div>
-
-        <div class="form-group">
-          <label for="file" class="col-sm-2 control-label">Image</label>
-          <div class="col-sm-10">
-            <input type="file" name="image" class="form-control" id="file">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="desc" class="col-sm-2 control-label">Body</label>
-          <div class="col-sm-10">
-            <textarea rows="5" name="body" placeholder="Enter the article description" id="desc" cols="30" rows="10" class="form-control">{{ article.body }}</textarea>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="tags" class="col-sm-2 control-label">Tags</label>
-          <div class="col-sm-10">
-            <input type="text" name="tags" value="{{ article.tags }}" placeholder="Enter the tags" class="form-control" id="tags">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-primary" type="submit">Save</button>
-            &nbsp;
-            <a href="/articles" class="btn btn-link">Cancel</a>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
-    <div class="col-md-4">
-      {% if (!article.isNew && article.image && article.image.files && article.image.files.length) %}
-        <img src="{{ article.image.cdnUri + '/mini_' + article.image.files[0] }}" alt="">
-      {% endif %}
+  </div>
+  <div class="large-popup register">
+    <div class="large-popup-fixed"></div>
+    <div class="container large-popup-container">
+      <div class="row">
+        <div class="col-md-10 col-md-push-1 col-lg-8 col-lg-push-2 large-popup-content">
+          <div class="row">
+            <div class="col-md-12">
+              <i class="fa fa-times close-button"></i>
+              <h5 class="large-popup-title">Register</h5>
+            </div>
+            <form action="./" class="popup-input-search">
+            <div class="col-md-6">
+              <input class="input-signtype" type="text" required="" placeholder="First Name">
+            </div>
+            <div class="col-md-6">
+              <input class="input-signtype" type="text" required="" placeholder="Last Name">
+            </div>
+            <div class="col-md-6">
+              <div class="be-custom-select-block">
+              <select class="be-custom-select">
+                <option value="" disabled selected>
+                  Country
+                </option>
+                <option value="">USA</option>
+                <option value="">Canada</option>
+                <option value="">England</option>
+              </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <input class="input-signtype" type="text" required="" placeholder="Email">
+            </div>
+            <div class="col-md-6">
+              <input class="input-signtype" type="text" required="" placeholder="Password">
+            </div>
+            <div class="col-md-6">
+              <input class="input-signtype" type="text" required="" placeholder="Repeat Password">
+            </div>
+            <div class="col-md-12 be-date-block">
+              <span class="large-popup-text">
+                Date of birth
+              </span>
+              <div class="be-custom-select-block mounth">
+                <select class="be-custom-select">
+                  <option value="" disabled selected>
+                    Mounth
+                  </option>
+                  <option value="">January</option> 
+                  <option value="">February</option>  
+                  <option value="">March</option> 
+                  <option value="">April</option> 
+                  <option value="">May</option> 
+                  <option value="">June</option>  
+                  <option value="">July</option>  
+                  <option value="">August</option>  
+                  <option value="">September</option> 
+                  <option value="">October</option> 
+                  <option value="">November</option>  
+                  <option value="">December</option>
+                </select>
+              </div>
+              <div class="be-custom-select-block">
+                <select class="be-custom-select">
+                  <option value="" disabled selected>
+                    Day
+                  </option>
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                  <option value="">4</option>
+                  <option value="">5</option>
+                  <option value="">6</option>
+                  <option value="">7</option>
+                  <option value="">8</option>
+                  <option value="">9</option>
+                  <option value="">10</option>
+                  <option value="">11</option>
+                  <option value="">12</option>
+                  <option value="">13</option>
+                  <option value="">14</option>
+                  <option value="">15</option>
+                  <option value="">16</option>
+                  <option value="">17</option>
+                  <option value="">18</option>
+                  <option value="">19</option>
+                  <option value="">20</option>
+                  <option value="">21</option>
+                  <option value="">22</option>
+                  <option value="">23</option>
+                  <option value="">24</option>
+                  <option value="">25</option>
+                  <option value="">26</option>
+                  <option value="">27</option>
+                  <option value="">28</option>
+                  <option value="">29</option>
+                  <option value="">30</option>
+                </select>
+              </div>
+              <div class="be-custom-select-block">
+                <select class="be-custom-select">
+                  <option value="" disabled selected>
+                    Year
+                  </option>
+                  <option value="">1996</option>
+                  <option value="">1997</option>
+                  <option value="">1998</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="be-checkbox">
+                <label class="check-box">
+                    <input class="checkbox-input" type="checkbox" required/> <span class="check-box-sign"></span>
+                </label>
+                <span class="large-popup-text">
+                  I have read and agree to the <a class="be-popup-terms" href="blog-detail-2.html">Terms of Use</a> and <a class="be-popup-terms" href="blog-detail-2.html">Privacy Policy</a>.
+                </span>
+              </div>
+              <div class="be-checkbox">
+                <label class="check-box">
+                    <input class="checkbox-input" type="checkbox" /> <span class="check-box-sign"></span>
+                </label>
+                <span class="large-popup-text">
+                  Send me notifications
+                </span>
+              </div>
+            </div>
+            <div class="col-md-6 for-signin">
+              <input type="submit" class="be-popup-sign-button" value="SIGN IN">
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}

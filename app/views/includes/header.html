@@ -1,3 +1,4 @@
+
 <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -22,13 +23,17 @@ Jeein
 
         <!--genView-->
 <li>
-	<a href="/browse" title="Browse">Browse</a>
+  <a href="/browse" title="Browse">Browse</a>
+</li>
+{% if (req.isAuthenticated()) %}
+<li>
+  <a href="{{ '/users/' + req.user.id +'/edit' }}" title="My Account">My Account</a>
+</li>
+ {% endif %}
+<li>
+  <a href="/recentlyViewed" title="Recently Viewed">Recently Viewed</a>
 </li><li>
-	<a href="/myAccount" title="My Account">My Account</a>
-</li><li>
-	<a href="/recentlyViewed" title="Recently Viewed">Recently Viewed</a>
-</li><li>
-	<a href="/search" title="Search">Search</a>
+  <a href="/search" title="Search">Search</a>
 </li>
 <!--end genView-->
 
